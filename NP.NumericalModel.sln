@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NP.NumericalModel", "src\NP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NP.NumericalModel.Tests", "tests\NP.NumericalModel.Tests\NP.NumericalModel.Tests.csproj", "{CD3029A4-B272-4B68-AF71-589664AE3DA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NP.NumericalModel.Console", "samples\NP.NumericalModel.Console\NP.NumericalModel.Console.csproj", "{B594159F-124D-4AA3-9E2E-0F557AEE6413}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,10 @@ Global
 		{CD3029A4-B272-4B68-AF71-589664AE3DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD3029A4-B272-4B68-AF71-589664AE3DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD3029A4-B272-4B68-AF71-589664AE3DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B594159F-124D-4AA3-9E2E-0F557AEE6413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B594159F-124D-4AA3-9E2E-0F557AEE6413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B594159F-124D-4AA3-9E2E-0F557AEE6413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B594159F-124D-4AA3-9E2E-0F557AEE6413}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
