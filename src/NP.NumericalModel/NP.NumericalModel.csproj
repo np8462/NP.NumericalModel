@@ -30,7 +30,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteModel.cs" />
+    <Compile Include="ByteReader.cs" />
+    <Compile Include="ByteSample.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="NibbleModel.cs" />
+    <Compile Include="NibblePair.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
