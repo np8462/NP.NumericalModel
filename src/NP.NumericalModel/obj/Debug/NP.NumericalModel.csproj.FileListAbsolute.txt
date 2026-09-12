@@ -1,0 +1,5 @@
+E:\NotSaved\Projects\github\NP.NumericalModel\src\NP.NumericalModel\bin\Debug\NP.NumericalModel.dll
+E:\NotSaved\Projects\github\NP.NumericalModel\src\NP.NumericalModel\bin\Debug\NP.NumericalModel.pdb
+E:\NotSaved\Projects\github\NP.NumericalModel\src\NP.NumericalModel\obj\Debug\NP.NumericalModel.csprojResolveAssemblyReference.cache
+E:\NotSaved\Projects\github\NP.NumericalModel\src\NP.NumericalModel\obj\Debug\NP.NumericalModel.dll
+E:\NotSaved\Projects\github\NP.NumericalModel\src\NP.NumericalModel\obj\Debug\NP.NumericalModel.pdb

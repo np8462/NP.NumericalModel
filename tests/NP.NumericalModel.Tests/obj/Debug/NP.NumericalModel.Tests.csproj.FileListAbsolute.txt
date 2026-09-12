@@ -1,0 +1,7 @@
+E:\NotSaved\Projects\github\NP.NumericalModel\tests\NP.NumericalModel.Tests\bin\Debug\NP.NumericalModel.Tests.dll
+E:\NotSaved\Projects\github\NP.NumericalModel\tests\NP.NumericalModel.Tests\bin\Debug\NP.NumericalModel.Tests.pdb
+E:\NotSaved\Projects\github\NP.NumericalModel\tests\NP.NumericalModel.Tests\bin\Debug\NP.NumericalModel.dll
+E:\NotSaved\Projects\github\NP.NumericalModel\tests\NP.NumericalModel.Tests\bin\Debug\NP.NumericalModel.pdb
+E:\NotSaved\Projects\github\NP.NumericalModel\tests\NP.NumericalModel.Tests\obj\Debug\NP.NumericalModel.Tests.csprojResolveAssemblyReference.cache
+E:\NotSaved\Projects\github\NP.NumericalModel\tests\NP.NumericalModel.Tests\obj\Debug\NP.NumericalModel.Tests.dll
+E:\NotSaved\Projects\github\NP.NumericalModel\tests\NP.NumericalModel.Tests\obj\Debug\NP.NumericalModel.Tests.pdb
