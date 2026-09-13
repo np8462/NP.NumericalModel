@@ -28,9 +28,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\AnalysisState.cs" />
+    <Compile Include="Analysis\ConceptualRelationAnalyzer.cs" />
+    <Compile Include="Analysis\ConceptualRelationGraph.cs" />
+    <Compile Include="Analysis\ConceptualRelationRule.cs" />
+    <Compile Include="Analysis\FactorialStateGenerator.cs" />
+    <Compile Include="Analysis\FactorRelation.cs" />
+    <Compile Include="Analysis\FactorRelationFinder.cs" />
+    <Compile Include="Analysis\GraphLayout.cs" />
+    <Compile Include="Analysis\RelationAnalyzer.cs" />
+    <Compile Include="Analysis\RelationDerivation.cs" />
+    <Compile Include="Analysis\RelationEdge.cs" />
+    <Compile Include="Analysis\RelationEngine.cs" />
+    <Compile Include="Analysis\RelationGraph.cs" />
+    <Compile Include="Analysis\RelationNode.cs" />
+    <Compile Include="Analysis\StateDecomposer.cs" />
+    <Compile Include="Analysis\StateRelationAnalyzer.cs" />
+    <Compile Include="Analysis\SvgGraphRenderer.cs" />
     <Compile Include="Base\BaseSystem.cs" />
     <Compile Include="ByteModel.cs" />
     <Compile Include="ByteReader.cs" />

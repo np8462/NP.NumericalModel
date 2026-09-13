@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="4850" height="630" viewBox="0 0 4850 630">
+<defs>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0,6 L9,3 z" />
+</marker>
+</defs>
+<line x1="105" y1="92" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="985" y="132" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1865" y1="214" x2="1225" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1545" y="254" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1225" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="665" y="315" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="336" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1545" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="1865" y1="214" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1865" y="193" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="336" x2="1225" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1225" y="315" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1225" y1="336" x2="105" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="665" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="1865" y1="214" x2="2665" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="254" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="2665" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2425" y="315" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="2185" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="2665" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2425" y="315" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2185" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="2665" y1="336" x2="2665" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2665" y="315" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="2665" y1="336" x2="3785" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="3225" y="315" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="2665" y1="336" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2745" y="315" font-size="11" text-anchor="middle" fill="black">ConceptualAggregation</text>
+<line x1="2825" y1="336" x2="1225" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2025" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1225" y1="458" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="665" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="458" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2025" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2825" y1="336" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="458" x2="1225" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1225" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1225" y1="458" x2="2185" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1705" y="437" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="2825" y1="336" x2="1705" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1705" y1="458" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1545" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="1385" y1="336" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1705" y1="458" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1545" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="1385" y1="336" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1705" y1="458" x2="1705" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1705" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1705" y1="458" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="425" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="265" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="425" y1="214" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="265" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="425" y1="214" x2="105" y2="50" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="265" y="132" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="105" y1="92" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="985" y="132" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="425" y1="214" x2="1225" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="825" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1225" y1="336" x2="105" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="665" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="745" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="425" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="745" y1="214" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1065" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="1385" y1="336" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="745" y1="214" x2="425" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="585" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="425" y1="336" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1145" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="745" y1="214" x2="2025" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="2025" y1="336" x2="265" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1145" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="1065" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="585" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1065" y1="214" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="2185" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="214" x2="4585" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="4585" y1="336" x2="265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2425" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="214" x2="2505" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1785" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="2505" y1="336" x2="585" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1545" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="1225" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="665" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1225" y1="214" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2025" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="2825" y1="336" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="214" x2="3945" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2585" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="3945" y1="336" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2905" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="214" x2="3305" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="3305" y1="336" x2="425" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1865" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="1545" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="825" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1545" y1="214" x2="3785" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2665" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="3785" y1="336" x2="3785" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="3785" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1545" y1="214" x2="2985" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2985" y1="336" x2="3785" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="3385" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1545" y1="214" x2="4105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="4105" y1="336" x2="265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="315" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="1705" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="905" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1705" y1="214" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2985" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="4265" y1="336" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="4265" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1705" y1="214" x2="2345" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2025" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2345" y1="336" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2105" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1705" y1="214" x2="4425" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="3065" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="4425" y1="336" x2="745" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2585" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="2025" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1065" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="2025" y1="214" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1945" y="193" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="1865" y1="214" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1865" y="193" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="2025" y1="214" x2="1705" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1865" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="1705" y1="336" x2="105" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="905" y="376" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="2025" y1="214" x2="4745" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="3385" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="4745" y1="336" x2="905" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="105" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="105" y1="214" x2="265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="185" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="265" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1225" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="105" y1="214" x2="1545" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="825" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="1545" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1865" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="105" y1="214" x2="2665" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="2665" y1="336" x2="3785" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="3225" y="315" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="2665" y1="336" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2745" y="315" font-size="11" text-anchor="middle" fill="black">ConceptualAggregation</text>
+<line x1="2825" y1="336" x2="1225" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2025" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1225" y1="458" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="665" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="458" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2025" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2825" y1="336" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1225" y1="458" x2="1225" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1225" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1225" y1="458" x2="2185" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1705" y="437" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="2825" y1="336" x2="1705" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1705" y1="458" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1545" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="1385" y1="336" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1705" y1="458" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1545" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="1385" y1="336" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1705" y1="458" x2="1705" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1705" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1705" y1="458" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="265" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="185" y="132" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="265" y1="214" x2="585" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="425" y="254" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="585" y1="336" x2="2185" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="376" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="265" y1="214" x2="745" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="505" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="745" y1="336" x2="1865" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1305" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="265" y1="214" x2="3625" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1945" y="254" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="3625" y1="336" x2="585" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2105" y="315" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="585" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="345" y="132" font-size="11" text-anchor="middle" fill="black">State</text>
+<line x1="585" y1="214" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2425" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="4265" y1="336" x2="1385" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1385" y1="458" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1385" y1="458" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="4265" y1="336" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="4265" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1385" y1="458" x2="1385" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1385" y1="458" x2="105" y2="538" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="498" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="585" y1="214" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="254" font-size="11" text-anchor="middle" fill="black">DigitDifference</text>
+<line x1="2185" y1="336" x2="1065" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1065" y1="458" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="585" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="458" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2185" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="458" x2="1065" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1065" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1065" y1="458" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1945" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="585" y1="214" x2="905" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="254" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="905" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="505" y="315" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="905" y1="336" x2="585" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="585" y1="214" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2425" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="905" y1="336" x2="1385" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1145" y="376" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1385" y1="458" x2="105" y2="538" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="498" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="585" y1="214" x2="3465" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2025" y="254" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="3465" y1="336" x2="2185" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="2185" y1="458" x2="2185" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="437" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="3465" y1="336" x2="2185" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2185" y1="458" x2="2185" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="437" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="3465" y1="336" x2="3465" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="3465" y="315" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="3465" y1="336" x2="105" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1785" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="1385" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="132" font-size="11" text-anchor="middle" fill="black">State</text>
+<line x1="1385" y1="214" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="4265" y1="336" x2="1385" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1385" y1="458" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1385" y1="458" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="4265" y1="336" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="4265" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1385" y1="458" x2="1385" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1385" y1="458" x2="105" y2="538" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="498" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="1385" y1="214" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1785" y="254" font-size="11" text-anchor="middle" fill="black">DigitDifference</text>
+<line x1="2185" y1="336" x2="1065" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="376" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1065" y1="458" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="585" y="376" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="458" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="2185" y1="336" x2="2185" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2185" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="458" x2="1065" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1065" y="437" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1065" y1="458" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1945" y="376" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="1385" y1="214" x2="1065" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1225" y="254" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1065" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="585" y="315" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="105" y1="336" x2="105" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="105" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="336" x2="1385" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1225" y="254" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="1385" y1="214" x2="4265" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="254" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1065" y1="336" x2="1385" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1225" y="376" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1385" y1="458" x2="105" y2="538" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="745" y="498" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="1385" y1="214" x2="1865" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="254" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="1865" y1="336" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="315" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="1385" y1="336" x2="1385" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1385" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1865" y1="336" x2="1545" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1705" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="1545" y1="458" x2="105" y2="538" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="825" y="498" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="1865" y1="336" x2="1865" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1865" y="376" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="1865" y1="458" x2="105" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="985" y="437" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="1385" y1="214" x2="3145" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2265" y="254" font-size="11" text-anchor="middle" fill="black">FactorRelation</text>
+<line x1="3145" y1="336" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2985" y="315" font-size="11" text-anchor="middle" fill="black">PairLeft</text>
+<line x1="2825" y1="336" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2825" y="315" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="3145" y1="336" x2="425" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1785" y="376" font-size="11" text-anchor="middle" fill="black">PairRight</text>
+<line x1="425" y1="458" x2="2825" y2="294" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1625" y="376" font-size="11" text-anchor="middle" fill="black">DigitSum</text>
+<line x1="3145" y1="336" x2="2025" y2="416" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="2585" y="376" font-size="11" text-anchor="middle" fill="black">ComposeDigitSums</text>
+<line x1="2025" y1="458" x2="105" y2="538" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="1065" y="498" font-size="11" text-anchor="middle" fill="black">NumericSum</text>
+<line x1="105" y1="92" x2="905" y2="172" stroke="black" stroke-width="1.2" marker-end="url(#arrow)" />
+<text x="505" y="132" font-size="11" text-anchor="middle" fill="black">State</text>
+<rect x="50" y="50" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="105" y="76" font-size="14" text-anchor="middle" fill="black">252</text>
+<rect x="1810" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1865" y="198" font-size="14" text-anchor="middle" fill="black">9</text>
+<rect x="1170" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1225" y="320" font-size="14" text-anchor="middle" fill="black">1:9</text>
+<rect x="50" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="105" y="320" font-size="14" text-anchor="middle" fill="black">1</text>
+<rect x="50" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="105" y="442" font-size="14" text-anchor="middle" fill="black">10</text>
+<rect x="2610" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2665" y="320" font-size="14" text-anchor="middle" fill="black">3:3</text>
+<rect x="2130" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2185" y="320" font-size="14" text-anchor="middle" fill="black">3</text>
+<rect x="3730" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="3785" y="320" font-size="14" text-anchor="middle" fill="black">6</text>
+<rect x="2770" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2825" y="320" font-size="14" text-anchor="middle" fill="black">4</text>
+<rect x="1170" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1225" y="442" font-size="14" text-anchor="middle" fill="black">1:4</text>
+<rect x="2130" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2185" y="442" font-size="14" text-anchor="middle" fill="black">5</text>
+<rect x="1650" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1705" y="442" font-size="14" text-anchor="middle" fill="black">2:2</text>
+<rect x="1330" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1385" y="320" font-size="14" text-anchor="middle" fill="black">2</text>
+<rect x="370" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="425" y="198" font-size="14" text-anchor="middle" fill="black">1:252</text>
+<rect x="690" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="745" y="198" font-size="14" text-anchor="middle" fill="black">2:126</text>
+<rect x="370" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="425" y="320" font-size="14" text-anchor="middle" fill="black">126</text>
+<rect x="1970" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2025" y="320" font-size="14" text-anchor="middle" fill="black">2:9</text>
+<rect x="210" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="265" y="442" font-size="14" text-anchor="middle" fill="black">11</text>
+<rect x="1010" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1065" y="198" font-size="14" text-anchor="middle" fill="black">3:84</text>
+<rect x="4530" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="4585" y="320" font-size="14" text-anchor="middle" fill="black">84</text>
+<rect x="210" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="265" y="320" font-size="14" text-anchor="middle" fill="black">12</text>
+<rect x="2450" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2505" y="320" font-size="14" text-anchor="middle" fill="black">3:12</text>
+<rect x="530" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="585" y="442" font-size="14" text-anchor="middle" fill="black">15</text>
+<rect x="1170" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1225" y="198" font-size="14" text-anchor="middle" fill="black">4:63</text>
+<rect x="3890" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="3945" y="320" font-size="14" text-anchor="middle" fill="black">63</text>
+<rect x="3250" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="3305" y="320" font-size="14" text-anchor="middle" fill="black">4:9</text>
+<rect x="370" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="425" y="442" font-size="14" text-anchor="middle" fill="black">13</text>
+<rect x="1490" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1545" y="198" font-size="14" text-anchor="middle" fill="black">6:42</text>
+<rect x="2930" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2985" y="320" font-size="14" text-anchor="middle" fill="black">42</text>
+<rect x="4050" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="4105" y="320" font-size="14" text-anchor="middle" fill="black">6:6</text>
+<rect x="1650" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1705" y="198" font-size="14" text-anchor="middle" fill="black">7:36</text>
+<rect x="4210" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="4265" y="320" font-size="14" text-anchor="middle" fill="black">7</text>
+<rect x="2290" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2345" y="320" font-size="14" text-anchor="middle" fill="black">36</text>
+<rect x="4370" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="4425" y="320" font-size="14" text-anchor="middle" fill="black">7:9</text>
+<rect x="690" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="745" y="442" font-size="14" text-anchor="middle" fill="black">16</text>
+<rect x="1970" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2025" y="198" font-size="14" text-anchor="middle" fill="black">9:28</text>
+<rect x="1650" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1705" y="320" font-size="14" text-anchor="middle" fill="black">28</text>
+<rect x="4690" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="4745" y="320" font-size="14" text-anchor="middle" fill="black">9:10</text>
+<rect x="850" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="905" y="442" font-size="14" text-anchor="middle" fill="black">19</text>
+<rect x="50" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="105" y="198" font-size="14" text-anchor="middle" fill="black">12:21</text>
+<rect x="1490" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1545" y="320" font-size="14" text-anchor="middle" fill="black">21</text>
+<rect x="210" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="265" y="198" font-size="14" text-anchor="middle" fill="black">14:18</text>
+<rect x="530" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="585" y="320" font-size="14" text-anchor="middle" fill="black">14</text>
+<rect x="690" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="745" y="320" font-size="14" text-anchor="middle" fill="black">18</text>
+<rect x="3570" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="3625" y="320" font-size="14" text-anchor="middle" fill="black">5:9</text>
+<rect x="530" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="585" y="198" font-size="14" text-anchor="middle" fill="black">25</text>
+<rect x="1330" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1385" y="442" font-size="14" text-anchor="middle" fill="black">1:7</text>
+<rect x="50" y="538" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="105" y="564" font-size="14" text-anchor="middle" fill="black">8</text>
+<rect x="1010" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1065" y="442" font-size="14" text-anchor="middle" fill="black">1:3</text>
+<rect x="850" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="905" y="320" font-size="14" text-anchor="middle" fill="black">1:25</text>
+<rect x="3410" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="3465" y="320" font-size="14" text-anchor="middle" fill="black">5:5</text>
+<rect x="1330" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1385" y="198" font-size="14" text-anchor="middle" fill="black">52</text>
+<rect x="1010" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1065" y="320" font-size="14" text-anchor="middle" fill="black">1:52</text>
+<rect x="1810" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1865" y="320" font-size="14" text-anchor="middle" fill="black">2:26</text>
+<rect x="1490" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1545" y="442" font-size="14" text-anchor="middle" fill="black">26</text>
+<rect x="1810" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="1865" y="442" font-size="14" text-anchor="middle" fill="black">2:8</text>
+<rect x="3090" y="294" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="3145" y="320" font-size="14" text-anchor="middle" fill="black">4:13</text>
+<rect x="1970" y="416" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="2025" y="442" font-size="14" text-anchor="middle" fill="black">4:4</text>
+<rect x="850" y="172" width="110" height="42" rx="6" ry="6" fill="white" stroke="black" stroke-width="1.2" />
+<text x="905" y="198" font-size="14" text-anchor="middle" fill="black">2:5:2</text>
+</svg>

@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using NP.NumericalModel;
 using NP.NumericalModel.ConsoleSample;
+using NP.NumericalModel.Analysis;
 
 
 namespace NP.NumericalModel.ConsoleSample
@@ -19,10 +20,19 @@ namespace NP.NumericalModel.ConsoleSample
             System.Console.WriteLine();
 
             BaseSystemDemo.Run();
-
             StructuralModelDemo.Run();
-
             BoundaryTransitionDemo.Run();
+            RelationAnalyzerDemo.Run();
+
+            FactorialStateDemo.Run();
+
+            FactorRelationDemo.Run();
+
+            ConceptualRelationDemo.Run();
+
+            RelationEngineDemo.Run();
+
+
 
             System.Console.WriteLine("Press any key to exit...");
             System.Console.ReadKey();

@@ -33,6 +33,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1Tests.cs" />
+    <Compile Include="FactorialStateGeneratorTests.cs" />
+    <Compile Include="FactorRelationTests.cs" />
+    <Compile Include="RelationAnalyzerTests.cs" />
     <Compile Include="StructuralModelTests.cs" />
     <ProjectReference Include="..\..\src\NP.NumericalModel\NP.NumericalModel.csproj">
       <Project>{A9D0AE0E-6487-4C4A-91E0-1B4FB91A3901}</Project>
