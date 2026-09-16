@@ -29,7 +29,9 @@ namespace NP.NumericalModel.Base
 
         public BigInteger DecimalValue { get; private set; }
 
-        public BaseDecomposition(string representation, BaseSystem baseSystem)
+        public BaseDecomposition(
+            string representation,
+            BaseSystem baseSystem)
         {
             if (representation == null)
             {
@@ -41,17 +43,31 @@ namespace NP.NumericalModel.Base
                 throw new ArgumentNullException("baseSystem");
             }
 
+            if (representation.Length == 0)
+            {
+                throw new ArgumentException(
+                    "Representation cannot be empty.",
+                    "representation");
+            }
+
             Representation = representation;
             BaseSystem = baseSystem;
 
             List<int> digitList = new List<int>();
-            List<BigInteger> contributionList = new List<BigInteger>();
+            List<BigInteger> contributionList =
+                new List<BigInteger>();
+
             BigInteger value = BigInteger.Zero;
+
             int index;
 
-            for (index = 0; index < representation.Length; index++)
+            for (index = 0;
+                 index < representation.Length;
+                 index++)
             {
-                int digit = ParseDigit(representation[index]);
+                int digit =
+                    BaseConverter.SymbolToDigit(
+                        representation[index]);
 
                 if (!baseSystem.IsValidDigit(digit))
                 {
@@ -63,12 +79,21 @@ namespace NP.NumericalModel.Base
                 digitList.Add(digit);
             }
 
-            for (index = 0; index < digitList.Count; index++)
+            for (index = 0;
+                 index < digitList.Count;
+                 index++)
             {
-                int power = digitList.Count - 1 - index;
-                BigInteger contribution = digitList[index] * BigInteger.Pow(baseSystem.Base, power);
+                int power =
+                    digitList.Count - 1 - index;
+
+                BigInteger contribution =
+                    digitList[index] *
+                    BigInteger.Pow(
+                        baseSystem.Base,
+                        power);
 
                 contributionList.Add(contribution);
+
                 value += contribution;
             }
 
@@ -82,14 +107,17 @@ namespace NP.NumericalModel.Base
             int index;
             string result = "";
 
-            for (index = 0; index < digits.Length; index++)
+            for (index = 0;
+                 index < digits.Length;
+                 index++)
             {
                 if (index > 0)
                 {
                     result += " + ";
                 }
 
-                result += digits[index].ToString()
+                result +=
+                    digits[index].ToString()
                     + "*"
                     + BaseSystem.Base.ToString()
                     + "^"
@@ -97,26 +125,6 @@ namespace NP.NumericalModel.Base
             }
 
             return result;
-        }
-
-        private static int ParseDigit(char value)
-        {
-            if (value >= '0' && value <= '9')
-            {
-                return value - '0';
-            }
-
-            if (value >= 'A' && value <= 'Z')
-            {
-                return value - 'A' + 10;
-            }
-
-            if (value >= 'a' && value <= 'z')
-            {
-                return value - 'a' + 10;
-            }
-
-            return -1;
         }
     }
 }

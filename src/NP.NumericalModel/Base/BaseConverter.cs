@@ -33,7 +33,7 @@ namespace NP.NumericalModel.Base
 
             for (index = 0; index < representation.Length; index++)
             {
-                int digit = ParseDigit(representation[index]);
+                int digit = SymbolToDigit(representation[index]);
 
                 if (!sourceBase.IsValidDigit(digit))
                 {
@@ -71,7 +71,7 @@ namespace NP.NumericalModel.Base
             while (remaining > BigInteger.Zero)
             {
                 BigInteger remainder = remaining % targetBase.Base;
-                result.Insert(0, FormatDigit((int)remainder));
+                result.Insert(0, DigitToSymbol((int)remainder));
                 remaining = remaining / targetBase.Base;
             }
 
@@ -87,39 +87,62 @@ namespace NP.NumericalModel.Base
             return FromDecimal(decimalValue, targetBase);
         }
 
-        private static int ParseDigit(char value)
+        //private static int ParseDigit(char value)
+        //{
+        //    if (value >= '0' && value <= '9')
+        //    {
+        //        return value - '0';
+        //    }
+
+        //    if (value >= 'A' && value <= 'Z')
+        //    {
+        //        return value - 'A' + 10;
+        //    }
+
+        //    if (value >= 'a' && value <= 'z')
+        //    {
+        //        return value - 'a' + 10;
+        //    }
+
+        //    return -1;
+        //}
+
+        //private static char FormatDigit(int value)
+        //{
+        //    if (value >= 0 && value <= 9)
+        //    {
+        //        return (char)('0' + value);
+        //    }
+
+        //    if (value >= 10 && value <= 35)
+        //    {
+        //        return (char)('A' + value - 10);
+        //    }
+
+        //    throw new ArgumentOutOfRangeException("value");
+        //}
+
+        public static int SymbolToDigit(char symbol)
         {
-            if (value >= '0' && value <= '9')
-            {
-                return value - '0';
-            }
+            if (symbol >= '0' && symbol <= '9')
+                return symbol - '0';
 
-            if (value >= 'A' && value <= 'Z')
-            {
-                return value - 'A' + 10;
-            }
+            if (symbol >= 'A' && symbol <= 'Z')
+                return symbol - 'A' + 10;
 
-            if (value >= 'a' && value <= 'z')
-            {
-                return value - 'a' + 10;
-            }
+            if (symbol >= 'a' && symbol <= 'z')
+                return symbol - 'a' + 10;
 
-            return -1;
+            throw new ArgumentException("Invalid digit symbol.");
         }
 
-        private static char FormatDigit(int value)
+        private static char DigitToSymbol(int digit)
         {
-            if (value >= 0 && value <= 9)
-            {
-                return (char)('0' + value);
-            }
+            if (digit < 10)
+                return (char)('0' + digit);
 
-            if (value >= 10 && value <= 35)
-            {
-                return (char)('A' + value - 10);
-            }
-
-            throw new ArgumentOutOfRangeException("value");
+            return (char)('A' + digit - 10);
         }
+
     }
 }
