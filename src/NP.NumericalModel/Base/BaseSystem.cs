@@ -271,4 +271,59 @@ namespace NP.NumericalModel.Base
         }
     }
 
+    public class NumericalConcept
+    {
+        public string Symbol { get; set; }
+        public int? NumericValue { get; set; }
+
+        public string Representation { get; set; }
+        public string Interpretation { get; set; }
+
+        public List<NumericalRelation> Relations { get; private set; }
+
+        public NumericalConcept()
+        {
+            Relations = new List<NumericalRelation>();
+        }
+    }
+
+    public class NumericalRelation
+    {
+        public NumericalConcept Source { get; set; }
+        public NumericalConcept Target { get; set; }
+
+        public string RelationType { get; set; }
+        public string Symbol { get; set; }
+        public string Interpretation { get; set; }
+    }
+
+    public class NumericalInterpretation
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+
+        public List<NumericalConcept> Concepts { get; private set; }
+        public List<NumericalRelation> Relations { get; private set; }
+
+        public NumericalInterpretation()
+        {
+            Concepts = new List<NumericalConcept>();
+            Relations = new List<NumericalRelation>();
+        }
+    }
+
+    //public class InterpretationDefinition
+    //{
+    //    public string Name { get; set; }
+    //    public string Version { get; set; }
+
+    //    public List<NumericalConcept> Concepts { get; private set; }
+    //    public List<ConceptualRelation> Relations { get; private set; }
+
+    //    public InterpretationDefinition()
+    //    {
+    //        Concepts = new List<NumericalConcept>();
+    //        Relations = new List<ConceptualRelation>();
+    //    }
+    //}
 }

@@ -55,6 +55,10 @@
     <Compile Include="ByteModel.cs" />
     <Compile Include="ByteReader.cs" />
     <Compile Include="ByteSample.cs" />
+    <Compile Include="Interpretation\ConceptualRelation.cs" />
+    <Compile Include="Interpretation\InterpretationDefinition.cs" />
+    <Compile Include="Interpretation\NumericalConcept.cs" />
+    <Compile Include="Interpretation\RelationChain.cs" />
     <Compile Include="NibbleModel.cs" />
     <Compile Include="NibblePair.cs" />
     <Compile Include="NumericalExpansion17.cs" />
