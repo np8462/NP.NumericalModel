@@ -50,6 +50,8 @@
     <Compile Include="Analysis\StateRelationAnalyzer.cs" />
     <Compile Include="Analysis\SvgGraphRenderer.cs" />
     <Compile Include="Base\BaseSystem.cs" />
+    <Compile Include="Base\BaseConverter.cs" />
+    <Compile Include="Base\BaseDecomposition.cs" />
     <Compile Include="ByteModel.cs" />
     <Compile Include="ByteReader.cs" />
     <Compile Include="ByteSample.cs" />
