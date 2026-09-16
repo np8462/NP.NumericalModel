@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseSystemDemo.cs" />
+    <Compile Include="BaseConversionDemo.cs" />
     <Compile Include="BoundaryTransitionDemo.cs" />
     <Compile Include="ConceptualRelationDemo.cs" />
     <Compile Include="RelationEngineDemo.cs" />
