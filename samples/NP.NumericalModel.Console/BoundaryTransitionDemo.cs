@@ -16,6 +16,10 @@ namespace NP.NumericalModel.ConsoleSample
             TestBoundary(10);
 
             System.Console.WriteLine();
+            Console.WriteLine(
+    "Press ENTER to exit.");
+
+            Console.ReadLine();
         }
 
         private static void TestBoundary(int numberBase)

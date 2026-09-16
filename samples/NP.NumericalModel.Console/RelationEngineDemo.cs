@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using NP.NumericalModel.Analysis;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace NP.NumericalModel.ConsoleSample
 {
     class RelationEngineDemo
     {
+        //[DllImport("kernel32.dll"
+        //private static extern bool AllocConsole();
+
+        //[DllImport("kernel32.dll")]
+        //private static extern bool FreeConsole();
+
        public static void Run()
        {
            RelationEngine engine =
@@ -35,6 +43,8 @@ namespace NP.NumericalModel.ConsoleSample
                 graph,
                 layout,
                 filePath);
+
+            //TestConsole.Open();
 
             Console.WriteLine(
                 "SVG created: "
@@ -70,6 +80,8 @@ namespace NP.NumericalModel.ConsoleSample
                 "Press ENTER to exit.");
 
             Console.ReadLine();
+
+            //TestConsole.Hide();
         }
     }
 }

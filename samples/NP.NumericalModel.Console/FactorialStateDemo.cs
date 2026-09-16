@@ -61,6 +61,10 @@ namespace NP.NumericalModel.ConsoleSample
             }
 
             System.Console.WriteLine();
+            Console.WriteLine(
+    "Press ENTER to exit.");
+
+            Console.ReadLine();
         }
     }
 }

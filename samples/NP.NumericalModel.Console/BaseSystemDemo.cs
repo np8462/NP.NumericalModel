@@ -24,6 +24,10 @@ namespace NP.NumericalModel.ConsoleSample
             ShowBase(base16);
 
             System.Console.WriteLine();
+            Console.WriteLine(
+"Press ENTER to exit.");
+
+            Console.ReadLine();
         }
 
         private static void ShowBase(BaseSystem baseSystem)

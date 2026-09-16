@@ -16,6 +16,10 @@ namespace NP.NumericalModel.ConsoleSample
             AnalyzeValue(252);
 
             System.Console.WriteLine();
+            Console.WriteLine(
+"Press ENTER to exit.");
+
+            Console.ReadLine();
         }
 
         private static void AnalyzeValue(int value)
@@ -56,6 +60,7 @@ namespace NP.NumericalModel.ConsoleSample
             }
 
             System.Console.WriteLine();
+
         }
     }
 }

@@ -1,8 +1,9 @@
-using System;
-using System.Numerics;
-using NP.NumericalModel;
-using NP.NumericalModel.ConsoleSample;
+﻿using NP.NumericalModel;
 using NP.NumericalModel.Analysis;
+using NP.NumericalModel.ConsoleSample;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace NP.NumericalModel.ConsoleSample
 {
@@ -10,21 +11,55 @@ namespace NP.NumericalModel.ConsoleSample
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("=== NP.NumericalModel Console ===");
-            System.Console.WriteLine();
+            MainForm frmTst = new MainForm();
+            Application.Run(frmTst);
+        }
+    }
 
-            BaseSystemDemo.Run();
-            BaseConversionDemo.Run();
-            StructuralModelDemo.Run();
-            BoundaryTransitionDemo.Run();
-            RelationAnalyzerDemo.Run();
-            FactorialStateDemo.Run();
-            FactorRelationDemo.Run();
-            ConceptualRelationDemo.Run();
-            RelationEngineDemo.Run();
+    public static class TestConsole
+    {
+        [DllImport("kernel32.dll")]
+        private static extern bool AllocConsole();
 
-            System.Console.WriteLine("Press any key to exit...");
-            System.Console.ReadKey();
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(
+            IntPtr hWnd,
+            int nCmdShow);
+
+        private const int SW_HIDE = 0;
+        private const int SW_SHOW = 5;
+
+        private static bool initialized = false;
+
+        public static void Open()
+        {
+            if (!initialized)
+            {
+                AllocConsole();
+                initialized = true;
+            }
+
+            IntPtr handle = GetConsoleWindow();
+
+            if (handle != IntPtr.Zero)
+            {
+                ShowWindow(handle, SW_SHOW);
+            }
+
+            Console.Clear();
+        }
+
+        public static void Hide()
+        {
+            IntPtr handle = GetConsoleWindow();
+
+            if (handle != IntPtr.Zero)
+            {
+                ShowWindow(handle, SW_HIDE);
+            }
         }
     }
 }

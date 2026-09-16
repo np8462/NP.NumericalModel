@@ -5,3 +5,5 @@ E:\NotSaved\Projects\github\NP.NumericalModel\samples\NP.NumericalModel.Console\
 E:\NotSaved\Projects\github\NP.NumericalModel\samples\NP.NumericalModel.Console\bin\Debug\NP.NumericalModel.pdb
 E:\NotSaved\Projects\github\NP.NumericalModel\samples\NP.NumericalModel.Console\obj\Debug\NP.NumericalModel.ConsoleSample.exe
 E:\NotSaved\Projects\github\NP.NumericalModel\samples\NP.NumericalModel.Console\obj\Debug\NP.NumericalModel.ConsoleSample.pdb
+E:\NotSaved\Projects\github\NP.NumericalModel\samples\NP.NumericalModel.Console\obj\Debug\NP.NumericalModel.ConsoleSample.csproj.GenerateResource.Cache
+E:\NotSaved\Projects\github\NP.NumericalModel\samples\NP.NumericalModel.Console\obj\Debug\NP.NumericalModel.ConsoleSample.MainForm.resources
