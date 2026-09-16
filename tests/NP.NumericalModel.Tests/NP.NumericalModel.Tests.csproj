@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1Tests.cs" />
+    <Compile Include="BaseModelTests.cs" />
     <Compile Include="FactorialStateGeneratorTests.cs" />
     <Compile Include="FactorRelationTests.cs" />
     <Compile Include="RelationAnalyzerTests.cs" />
