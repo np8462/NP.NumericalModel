@@ -25,8 +25,17 @@ namespace NP.NumericalModel.Tests
         [TestMethod]
         public void BoundaryTransitionPreservesTheExistingConceptualRule()
         {
-            SubsetRelation source6 = new SubsetRelation(new BaseSystem(6), 5, 5);
-            SubsetRelation source10 = new SubsetRelation(new BaseSystem(10), 9, 9);
+            SubsetRelation source6 = new SubsetRelation(
+                5,
+                5,
+                StructuralSeparator.Colon,
+                new BaseSystem(6));
+
+            SubsetRelation source10 = new SubsetRelation(
+                9,
+                9,
+                StructuralSeparator.Colon,
+                new BaseSystem(10));
 
             BoundaryTransition transition6 = new BoundaryTransition(source6);
             BoundaryTransition transition10 = new BoundaryTransition(source10);
@@ -35,6 +44,19 @@ namespace NP.NumericalModel.Tests
             Assert.AreEqual("6:6", transition6.GetConceptualResult());
             Assert.AreEqual("10:10", transition10.GetConceptualResult());
         }
+        //[TestMethod]
+        //public void BoundaryTransitionPreservesTheExistingConceptualRule()
+        //{
+        //    SubsetRelation source6 = new SubsetRelation(new BaseSystem(6), 5, 5);
+        //    SubsetRelation source10 = new SubsetRelation(new BaseSystem(10), 9, 9);
+
+        //    BoundaryTransition transition6 = new BoundaryTransition(source6);
+        //    BoundaryTransition transition10 = new BoundaryTransition(source10);
+
+        //    Assert.IsTrue(transition6.CanTransition);
+        //    Assert.AreEqual("6:6", transition6.GetConceptualResult());
+        //    Assert.AreEqual("10:10", transition10.GetConceptualResult());
+        //}
     }
 
     [TestClass]

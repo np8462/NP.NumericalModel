@@ -42,6 +42,7 @@
     <Compile Include="BaseConversionDemo.cs" />
     <Compile Include="BoundaryTransitionDemo.cs" />
     <Compile Include="ConceptualRelationDemo.cs" />
+    <Compile Include="InterpretationDemo.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

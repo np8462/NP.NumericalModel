@@ -109,6 +109,13 @@ namespace NP.NumericalModel.ConsoleSample
                 {
                     new DemoItem("RelationEngineDemo", RunRelationEngineDemo)
                 });
+
+            demoGroups.Add(
+                "Interpretation",
+                new List<DemoItem>
+                {
+                    new DemoItem("InterpretationDemo", RunInterpretationDemo)
+                });
         }
 
         private void LoadCategories()
@@ -231,6 +238,11 @@ namespace NP.NumericalModel.ConsoleSample
         private void RunRelationEngineDemo()
         {
             RelationEngineDemo.Run();
+        }
+
+        private void RunInterpretationDemo()
+        {
+            InterpretationDemo.Run();
         }
     }
 
