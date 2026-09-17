@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NP.NumericalModel.Interpretation;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
@@ -271,21 +272,21 @@ namespace NP.NumericalModel.Base
         }
     }
 
-    public class NumericalConcept
-    {
-        public string Symbol { get; set; }
-        public int? NumericValue { get; set; }
+    //public class NumericalConcept
+    //{
+    //    public string Symbol { get; set; }
+    //    public int? NumericValue { get; set; }
 
-        public string Representation { get; set; }
-        public string Interpretation { get; set; }
+    //    public string Representation { get; set; }
+    //    public string Interpretation { get; set; }
 
-        public List<NumericalRelation> Relations { get; private set; }
+    //    public List<NumericalRelation> Relations { get; private set; }
 
-        public NumericalConcept()
-        {
-            Relations = new List<NumericalRelation>();
-        }
-    }
+    //    public NumericalConcept()
+    //    {
+    //        Relations = new List<NumericalRelation>();
+    //    }
+    //}
 
     public class NumericalRelation
     {
