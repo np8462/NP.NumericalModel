@@ -1,6 +1,9 @@
-﻿using System;
+﻿using NP.NumericalModel.ConsoleSample.Svg;
+using NP.NumericalModel.Interpretation;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 
 namespace NP.NumericalModel.ConsoleSample
@@ -115,6 +118,31 @@ namespace NP.NumericalModel.ConsoleSample
                 new List<DemoItem>
                 {
                     new DemoItem("InterpretationDemo", RunInterpretationDemo)
+                });
+
+            demoGroups.Add(
+                "Visualization",
+                new List<DemoItem>
+                {
+                    new DemoItem(
+                        "SVG - Segment Division",
+                        RunSvgDemo),
+
+                    new DemoItem(
+                        "SVG - Relation Diagram",
+                        RunRelationDiagramDemo),
+
+                    new DemoItem(
+                        "SVG - Selected Relations",
+                        RunSelectedRelationsDemo),
+
+                    new DemoItem(
+                        "SVG - Seven Bridge",
+                        RunSevenBridgeDemo),
+
+                    new DemoItem(
+                        "SVG - Full Interpretation",
+                        RunFullInterpretationDemo)
                 });
         }
 
@@ -243,6 +271,116 @@ namespace NP.NumericalModel.ConsoleSample
         private void RunInterpretationDemo()
         {
             InterpretationDemo.Run();
+        }
+
+        private void RunSvgDemo()
+        {
+            SegmentDivision division =
+                new SegmentDivision(1m, 3);
+
+            string svg =
+                SvgRenderer.RenderSegmentDivision(
+                    division,
+                    900,
+                    400);
+
+            OpenSvg(
+                svg,
+                "NP_NumericalModel_SegmentDivision.svg");
+        }
+
+        private void RunRelationDiagramDemo()
+        {
+            InterpretationDefinition definition =
+                InterpretationDefinitionFactory
+                    .CreateSelectedRelationsDefinition();
+
+            string svg =
+                SvgRenderer.RenderRelationDiagram(
+                    definition,
+                    "Selected Numerical Relations");
+
+            OpenSvg(
+                svg,
+                "NP_NumericalModel_RelationDiagram.svg");
+        }
+
+        private void RunSelectedRelationsDemo()
+        {
+            InterpretationDefinition definition =
+                InterpretationDefinitionFactory
+                    .CreateSelectedRelationsDefinition();
+
+            string svg =
+                SvgRenderer.RenderRelationDiagram(
+                    definition,
+                    "Selected Numerical Relations");
+
+            OpenSvg(
+                svg,
+                "NP_NumericalModel_SelectedRelations.svg");
+        }
+
+        private void RunSevenBridgeDemo()
+        {
+            InterpretationDefinition definition =
+                InterpretationDefinitionFactory
+                    .CreateSevenBridgeDefinition();
+
+            string svg =
+                SvgRenderer.RenderRelationDiagram(
+                    definition,
+                    "Seven Bridge Interpretation");
+
+            OpenSvg(
+                svg,
+                "NP_NumericalModel_SevenBridge.svg");
+        }
+
+        private void RunFullInterpretationDemo()
+        {
+            InterpretationDefinition selected =
+                InterpretationDefinitionFactory
+                    .CreateSelectedRelationsDefinition();
+
+            InterpretationDefinition seven =
+                InterpretationDefinitionFactory
+                    .CreateSevenBridgeDefinition();
+
+            string svg =
+                SvgRenderer.RenderRelationDiagram(
+                    selected,
+                    "Full Interpretation - Selected Relations");
+
+            OpenSvg(
+                svg,
+                "NP_NumericalModel_FullInterpretation_Selected.svg");
+
+            string svgSeven =
+                SvgRenderer.RenderRelationDiagram(
+                    seven,
+                    "Full Interpretation - Seven Bridge");
+
+            OpenSvg(
+                svgSeven,
+                "NP_NumericalModel_FullInterpretation_SevenBridge.svg");
+        }
+
+        private void OpenSvg(
+string svg,
+string fileName)
+        {
+            string filePath =
+                System.IO.Path.Combine(
+                    System.IO.Path.GetTempPath(),
+                    fileName);
+
+            System.IO.File.WriteAllText(
+                filePath,
+                svg,
+                Encoding.UTF8);
+
+            System.Diagnostics.Process.Start(filePath);
         }
     }
 
