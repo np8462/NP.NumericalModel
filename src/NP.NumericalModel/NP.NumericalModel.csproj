@@ -57,8 +57,11 @@
     <Compile Include="ByteSample.cs" />
     <Compile Include="Interpretation\ConceptualRelation.cs" />
     <Compile Include="Interpretation\InterpretationDefinition.cs" />
+    <Compile Include="Interpretation\InterpretationDefinitionFactory.cs" />
     <Compile Include="Interpretation\NumericalConcept.cs" />
+    <Compile Include="Interpretation\NumericalRepresentation.cs" />
     <Compile Include="Interpretation\RelationChain.cs" />
+    <Compile Include="Interpretation\SegmentDivision.cs" />
     <Compile Include="NibbleModel.cs" />
     <Compile Include="NibblePair.cs" />
     <Compile Include="NumericalExpansion17.cs" />

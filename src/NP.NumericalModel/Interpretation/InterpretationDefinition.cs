@@ -9,6 +9,8 @@ namespace NP.NumericalModel.Interpretation
         private readonly List<ConceptualRelation> _relations;
         private readonly List<RelationChain> _chains;
 
+        private readonly List<NumericalRepresentation> _representations;
+
         public string Name { get; private set; }
 
         public string Version { get; private set; }
@@ -26,6 +28,11 @@ namespace NP.NumericalModel.Interpretation
         public IList<RelationChain> Chains
         {
             get { return _chains.AsReadOnly(); }
+        }
+
+        public IList<NumericalRepresentation> Representations
+        {
+            get { return _representations.AsReadOnly(); }
         }
 
         public InterpretationDefinition(
@@ -48,6 +55,8 @@ namespace NP.NumericalModel.Interpretation
             _concepts = new List<NumericalConcept>();
             _relations = new List<ConceptualRelation>();
             _chains = new List<RelationChain>();
+
+            _representations = new List<NumericalRepresentation>();
         }
 
         public void AddConcept(NumericalConcept concept)
@@ -78,6 +87,14 @@ namespace NP.NumericalModel.Interpretation
             }
 
             _chains.Add(chain);
+        }
+
+        public void AddRepresentation(NumericalRepresentation representation)
+        {
+            if (representation == null)
+                throw new ArgumentNullException("representation");
+
+            _representations.Add(representation);
         }
     }
 }
