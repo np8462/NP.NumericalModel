@@ -44,6 +44,64 @@ namespace NP.NumericalModel.Tests
             Assert.IsTrue(match.IsMatch);
         }
 
+
+        [TestMethod]
+        public void DetectsNumeratorReconstructionForTwentyTwoOverSeven()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            DerivedRelation relation =
+                new RatioRelationDeriver().Derive(new Ratio(22, 7));
+
+            PatternMatch match = analyzer.AnalyzeReconstruction(relation);
+
+            Assert.IsTrue(match.IsMatch);
+            Assert.AreEqual("NumeratorReconstruction", match.Name);
+            Assert.AreEqual(
+                "The whole part and remainder reconstruct the original numerator.",
+                match.Description);
+        }
+
+        [TestMethod]
+        public void DetectsNumeratorReconstructionForExactDivision()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            DerivedRelation relation =
+                new RatioRelationDeriver().Derive(new Ratio(42, 7));
+
+            PatternMatch match = analyzer.AnalyzeReconstruction(relation);
+
+            Assert.IsTrue(match.IsMatch);
+        }
+
+        [TestMethod]
+        public void RejectsInvalidNumeratorReconstruction()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            DerivedRelation relation =
+                new DerivedRelation(22, 7, 3, 2);
+
+            PatternMatch match = analyzer.AnalyzeReconstruction(relation);
+
+            Assert.IsFalse(match.IsMatch);
+            Assert.AreEqual("NumeratorReconstruction", match.Name);
+        }
+
+        [TestMethod]
+        public void RejectsNullDerivedRelationForReconstruction()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+
+            try
+            {
+                analyzer.AnalyzeReconstruction(null);
+                Assert.Fail("A null derived relation must be rejected.");
+            }
+            catch (ArgumentNullException)
+            {
+                Assert.IsTrue(true);
+            }
+        }
+
         [TestMethod]
         public void RejectsNullRatio()
         {
