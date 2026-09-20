@@ -18,11 +18,12 @@ Current flow:
       v
     PatternMatch
 
-The first capability is intentionally structural rather than conceptual.
+The pattern rules are intentionally structural rather than conceptual.
 
 ## ExactDivision
 
 For a ratio such as 42:7, the derived relation has a zero remainder.
+
 The analyzer reports:
 
     Name: ExactDivision
@@ -44,21 +45,10 @@ The same structural rule applies to 5:3:
 
     1 + 2/3
 
-## Why this is the first pattern
-
-This analyzer does not claim that a ratio represents pi, e, the golden ratio,
-or any user-defined conceptual meaning. It only detects a property that is
-already explicitly present in the derived relation: whether the remainder is
-zero.
-
-This keeps PatternAnalyzer testable and objective. Later pattern rules can be
-added one at a time when they have a clear input, output, and test.
-
-
 ## Numerator reconstruction pattern
 
-The analyzer now verifies the structural relationship between the four values
-in a derived relation:
+The analyzer verifies the structural relationship between the four values in a
+derived relation:
 
     Numerator = WholePart * Denominator + Remainder
 
@@ -86,4 +76,67 @@ is rejected because:
 
     3 * 7 + 2 = 23
 
-This is a mathematical/structural pattern, not a conceptual interpretation.
+## Combined ratio decomposition consistency
+
+The next pattern combines the existing Ratio and DerivedRelation instead of
+creating another independent mathematical representation.
+
+AnalyzeConsistency checks all of these structural conditions:
+
+1. The numerator and denominator in the ratio are the same as those in the
+   derived relation.
+2. The WholePart equals the ratio quotient.
+3. The Remainder equals the ratio remainder.
+4. The whole part and remainder reconstruct the original numerator.
+5. The remainder magnitude is smaller than the denominator magnitude.
+
+For 22:7:
+
+    Ratio:
+        Numerator   = 22
+        Denominator = 7
+
+    DerivedRelation:
+        WholePart = 3
+        Remainder = 1
+
+    Quotient/Remainder:
+        22 / 7 = 3 remainder 1
+
+    Reconstruction:
+        3 * 7 + 1 = 22
+
+Therefore the complete decomposition is structurally consistent.
+
+For 42:7:
+
+    42 / 7 = 6 remainder 0
+    6 * 7 + 0 = 42
+
+This is also consistent.
+
+This rule deliberately does not assign a conceptual meaning to 22:7, 42:7,
+or any other ratio. It only checks that the existing numerical objects agree
+with each other.
+
+## Important distinction
+
+A ratio such as 44/7 can later be represented as a combination of components,
+for example a whole component 42/7 plus a remainder component 2/7. That is a
+different modeling level from the single Ratio(44, 7).
+
+The current consistency pattern therefore does not assume that 44/7 is
+identical to 42/7. It validates only the decomposition of the specific ratio
+object it receives.
+
+This distinction keeps component relations available for a later stage without
+hard-coding them into the basic ratio model.
+
+## Why this remains structural
+
+The analyzer does not claim that a ratio represents pi, e, the golden ratio,
+or any user-defined conceptual meaning. Reference matching remains a separate
+stage.
+
+Later pattern rules can be added one at a time when they have a clear input,
+output, and test.
