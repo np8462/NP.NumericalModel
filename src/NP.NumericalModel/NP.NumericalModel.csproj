@@ -85,6 +85,7 @@
     <Compile Include="Geometry\Circle.cs" />
     <Compile Include="Geometry\Spiral.cs" />
     <Compile Include="Geometry\CartesianPlane.cs" />
+    <Compile Include="Visualization\SvgGeometryRenderer.cs" />
     <Compile Include="NibbleModel.cs" />
     <Compile Include="NibblePair.cs" />
     <Compile Include="NumericalExpansion17.cs" />
