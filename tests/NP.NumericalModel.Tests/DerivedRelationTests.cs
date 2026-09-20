@@ -84,13 +84,29 @@ namespace NP.NumericalModel.Tests
         }
 
         [TestMethod]
+        public void RejectsNullComposition()
+        {
+            RatioRelationDeriver deriver = new RatioRelationDeriver();
+
+            try
+            {
+                deriver.Derive((RatioComposition)null);
+                Assert.Fail("A null ratio composition must be rejected.");
+            }
+            catch (ArgumentNullException)
+            {
+                Assert.IsTrue(true);
+            }
+        }
+
+        [TestMethod]
         public void RejectsNullRatio()
         {
             RatioRelationDeriver deriver = new RatioRelationDeriver();
 
             try
             {
-                deriver.Derive(null);
+                deriver.Derive((Ratio)null);
                 Assert.Fail("A null ratio must be rejected.");
             }
             catch (ArgumentNullException)
