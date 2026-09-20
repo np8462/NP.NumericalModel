@@ -88,6 +88,73 @@ namespace NP.NumericalModel.Tests
         }
 
         [TestMethod]
+        public void ParsesFractionSubtraction()
+        {
+            NumericalExpressionParser parser = new NumericalExpressionParser();
+
+            NumericalExpression result =
+                parser.Parse("1/2 - 1/3");
+
+            Assert.AreEqual(1.0 / 6.0, result.Value, 0.0000000001);
+        }
+
+        [TestMethod]
+        public void ParsesFractionMultiplication()
+        {
+            NumericalExpressionParser parser = new NumericalExpressionParser();
+
+            NumericalExpression result =
+                parser.Parse("2/3 * 3/4");
+
+            Assert.AreEqual(1.0 / 2.0, result.Value, 0.0000000001);
+        }
+
+        [TestMethod]
+        public void ParsesFractionDivision()
+        {
+            NumericalExpressionParser parser = new NumericalExpressionParser();
+
+            NumericalExpression result =
+                parser.Parse("5/6 / 2/3");
+
+            Assert.AreEqual(5.0 / 4.0, result.Value, 0.0000000001);
+        }
+
+        [TestMethod]
+        public void ParsesUnarySigns()
+        {
+            NumericalExpressionParser parser = new NumericalExpressionParser();
+
+            NumericalExpression result =
+                parser.Parse("-2 + +3");
+
+            Assert.AreEqual(1.0, result.Value, 0.0000000001);
+        }
+
+        [TestMethod]
+        public void ParenthesesChangeArithmeticPrecedence()
+        {
+            NumericalExpressionParser parser = new NumericalExpressionParser();
+
+            NumericalExpression result =
+                parser.Parse("(1 + 2) * 3");
+
+            Assert.AreEqual(9.0, result.Value, 0.0000000001);
+        }
+
+        [TestMethod]
+        public void ColonAndSlashHaveSameDivisionMeaning()
+        {
+            NumericalExpressionParser parser = new NumericalExpressionParser();
+
+            NumericalExpression colonResult = parser.Parse("5:2");
+            NumericalExpression slashResult = parser.Parse("5/2");
+
+            Assert.AreEqual(slashResult.Value, colonResult.Value, 0.0000000001);
+            Assert.AreEqual(slashResult.Text, colonResult.Text);
+        }
+
+        [TestMethod]
         public void RejectsUnknownIdentifier()
         {
             NumericalExpressionParser parser = new NumericalExpressionParser();
