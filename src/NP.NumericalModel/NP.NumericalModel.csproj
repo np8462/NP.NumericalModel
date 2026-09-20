@@ -78,6 +78,13 @@
     <Compile Include="Interpretation\RealValue.cs" />
     <Compile Include="Interpretation\NumericalExpression.cs" />
     <Compile Include="Interpretation\NumericalExpressionParser.cs" />
+    <Compile Include="Geometry\Point2D.cs" />
+    <Compile Include="Geometry\Point3D.cs" />
+    <Compile Include="Geometry\Line2D.cs" />
+    <Compile Include="Geometry\Line3D.cs" />
+    <Compile Include="Geometry\Circle.cs" />
+    <Compile Include="Geometry\Spiral.cs" />
+    <Compile Include="Geometry\CartesianPlane.cs" />
     <Compile Include="NibbleModel.cs" />
     <Compile Include="NibblePair.cs" />
     <Compile Include="NumericalExpansion17.cs" />
