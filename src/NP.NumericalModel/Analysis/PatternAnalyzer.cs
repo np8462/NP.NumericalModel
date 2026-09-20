@@ -52,6 +52,48 @@ namespace NP.NumericalModel.Analysis
                 false);
         }
 
+        public PatternMatch AnalyzeConsistency(
+            Ratio ratio,
+            DerivedRelation relation)
+        {
+            if (ratio == null) throw new ArgumentNullException("ratio");
+            if (relation == null) throw new ArgumentNullException("relation");
+
+            bool sameRatio =
+                ratio.Numerator == relation.Numerator
+                && ratio.Denominator == relation.Denominator;
+
+            bool sameDecomposition =
+                ratio.Quotient == relation.WholePart
+                && ratio.Remainder == relation.Remainder;
+
+            long reconstructed =
+                relation.WholePart * relation.Denominator
+                + relation.Remainder;
+
+            bool validRemainder =
+                Math.Abs(relation.Remainder) < Math.Abs(relation.Denominator);
+
+            bool consistent =
+                sameRatio
+                && sameDecomposition
+                && reconstructed == relation.Numerator
+                && validRemainder;
+
+            if (consistent)
+            {
+                return new PatternMatch(
+                    "RatioDecompositionConsistency",
+                    "The ratio, whole part, remainder, and reconstruction are mutually consistent.",
+                    true);
+            }
+
+            return new PatternMatch(
+                "RatioDecompositionConsistency",
+                "The ratio, whole part, remainder, and reconstruction are not mutually consistent.",
+                false);
+        }
+
         public PatternMatch Analyze(Ratio ratio)
         {
             if (ratio == null) throw new ArgumentNullException("ratio");
