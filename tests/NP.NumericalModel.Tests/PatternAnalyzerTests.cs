@@ -44,7 +44,6 @@ namespace NP.NumericalModel.Tests
             Assert.IsTrue(match.IsMatch);
         }
 
-
         [TestMethod]
         public void DetectsNumeratorReconstructionForTwentyTwoOverSeven()
         {
@@ -94,6 +93,94 @@ namespace NP.NumericalModel.Tests
             try
             {
                 analyzer.AnalyzeReconstruction(null);
+                Assert.Fail("A null derived relation must be rejected.");
+            }
+            catch (ArgumentNullException)
+            {
+                Assert.IsTrue(true);
+            }
+        }
+
+        [TestMethod]
+        public void DetectsConsistentRatioDecompositionForTwentyTwoOverSeven()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            Ratio ratio = new Ratio(22, 7);
+            DerivedRelation relation =
+                new RatioRelationDeriver().Derive(ratio);
+
+            PatternMatch match = analyzer.AnalyzeConsistency(ratio, relation);
+
+            Assert.IsTrue(match.IsMatch);
+            Assert.AreEqual("RatioDecompositionConsistency", match.Name);
+        }
+
+        [TestMethod]
+        public void DetectsConsistentRatioDecompositionForExactDivision()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            Ratio ratio = new Ratio(42, 7);
+            DerivedRelation relation =
+                new RatioRelationDeriver().Derive(ratio);
+
+            PatternMatch match = analyzer.AnalyzeConsistency(ratio, relation);
+
+            Assert.IsTrue(match.IsMatch);
+        }
+
+        [TestMethod]
+        public void RejectsInconsistentWholePart()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            Ratio ratio = new Ratio(22, 7);
+            DerivedRelation relation =
+                new DerivedRelation(22, 7, 4, 1);
+
+            PatternMatch match = analyzer.AnalyzeConsistency(ratio, relation);
+
+            Assert.IsFalse(match.IsMatch);
+        }
+
+        [TestMethod]
+        public void RejectsInconsistentRemainder()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            Ratio ratio = new Ratio(22, 7);
+            DerivedRelation relation =
+                new DerivedRelation(22, 7, 3, 2);
+
+            PatternMatch match = analyzer.AnalyzeConsistency(ratio, relation);
+
+            Assert.IsFalse(match.IsMatch);
+        }
+
+        [TestMethod]
+        public void RejectsNullRatioForConsistency()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            DerivedRelation relation =
+                new RatioRelationDeriver().Derive(new Ratio(22, 7));
+
+            try
+            {
+                analyzer.AnalyzeConsistency(null, relation);
+                Assert.Fail("A null ratio must be rejected.");
+            }
+            catch (ArgumentNullException)
+            {
+                Assert.IsTrue(true);
+            }
+        }
+
+        [TestMethod]
+        public void RejectsNullDerivedRelationForConsistency()
+        {
+            PatternAnalyzer analyzer = new PatternAnalyzer();
+            Ratio ratio = new Ratio(22, 7);
+
+            try
+            {
+                analyzer.AnalyzeConsistency(ratio, null);
                 Assert.Fail("A null derived relation must be rejected.");
             }
             catch (ArgumentNullException)
