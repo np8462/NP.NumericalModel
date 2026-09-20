@@ -1,6 +1,10 @@
 using System;
+using System.IO;
+using System.Text;
+using System.Diagnostics;
 using NP.NumericalModel.Geometry;
 using NP.NumericalModel.Relation;
+using NP.NumericalModel.Visualization;
 
 namespace NP.NumericalModel.ConsoleSample
 {
@@ -32,6 +36,28 @@ namespace NP.NumericalModel.ConsoleSample
             Console.WriteLine("3D line end      : " + line.End);
             Console.WriteLine("3D line length   : " + line.Length);
             Console.WriteLine("Spiral point     : " + spiralPoint);
+
+            string svg = SvgGeometryRenderer.RenderDemo(
+                circle,
+                plane,
+                spiral,
+                line,
+                ratio,
+                1100,
+                800);
+
+            string filePath = Path.Combine(
+                Path.GetTempPath(),
+                "NP_NumericalModel_Geometry.svg");
+
+            File.WriteAllText(filePath, svg, Encoding.UTF8);
+
+            Console.WriteLine();
+            Console.WriteLine("SVG saved to : " + filePath);
+            Console.WriteLine("Opening SVG in the default browser...");
+
+            Process.Start(filePath);
+
             Console.WriteLine();
             Console.WriteLine("This demo models geometry only; it does not assign conceptual meaning to the numbers.");
             Console.WriteLine();
