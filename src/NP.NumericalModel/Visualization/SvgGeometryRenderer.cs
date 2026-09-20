@@ -58,7 +58,7 @@ namespace NP.NumericalModel.Visualization
                 "<text x=\"" + Format(centerX) +
                 "\" y=\"58\" text-anchor=\"middle\" " +
                 "font-family=\"Arial\" font-size=\"14\">" +
-                "Circle + Cartesian Plane + Spiral + Trigonometric Waves</text>");
+                "Circle + 3D Ratio + Spiral + Trigonometric Waves</text>");
 
             // Cartesian axes.
             svg.AppendLine(
@@ -101,13 +101,14 @@ namespace NP.NumericalModel.Visualization
                 "<text x=\"" + Format(centerX + 10) +
                 "\" y=\"82\" font-family=\"Arial\" font-size=\"13\">Y</text>");
 
-            // Circle and radius.
+            // Circle.
             svg.AppendLine(
                 "<circle cx=\"" + Format(centerX) +
                 "\" cy=\"" + Format(centerY) +
                 "\" r=\"" + Format(circleRadius) +
                 "\" fill=\"none\" stroke=\"#222\" stroke-width=\"3\" />");
 
+            // Radius and pi/4.
             svg.AppendLine(
                 "<line x1=\"" + Format(centerX) +
                 "\" y1=\"" + Format(centerY) +
@@ -120,7 +121,6 @@ namespace NP.NumericalModel.Visualization
                 "\" y=\"" + Format(centerY - 10) +
                 "\" text-anchor=\"middle\" font-family=\"Arial\" font-size=\"13\">r</text>");
 
-            // pi/4 reference.
             double angle = Math.PI / 4.0;
             double px = centerX + circleRadius * Math.Cos(angle);
             double py = centerY - circleRadius * Math.Sin(angle);
@@ -142,7 +142,65 @@ namespace NP.NumericalModel.Visualization
                 "\" y=\"" + Format(py - 8) +
                 "\" font-family=\"Arial\" font-size=\"13\">π/4</text>");
 
-            // Spiral: circle continues outward into 5:6-style ring spacing.
+            // 3:4 right-triangle / 3D-like construction anchored to the circle.
+            double triA = centerX;
+            double triB = centerY;
+            double triX = centerX + 3.0 * scale;
+            double triY = centerY - 4.0 * scale;
+            double triDepthX = triX - 0.9 * scale;
+            double triDepthY = triY + 0.7 * scale;
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triB) +
+                "\" stroke=\"#111\" stroke-width=\"2.5\" />");
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triY) +
+                "\" stroke=\"#111\" stroke-width=\"2.5\" />");
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triY) +
+                "\" stroke=\"#111\" stroke-width=\"3\" />");
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triY) +
+                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY) +
+                "\" stroke=\"#333\" stroke-width=\"2\" />");
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY + 4.0 * scale) +
+                "\" stroke=\"#333\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\" />");
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY) +
+                "\" stroke=\"#333\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\" />");
+
+            svg.AppendLine(
+                "<circle cx=\"" + Format(triX) +
+                "\" cy=\"" + Format(triY) +
+                "\" r=\"6\" fill=\"#111\" />");
+
+            svg.AppendLine(
+                "<text x=\"" + Format(triX + 12) +
+                "\" y=\"" + Format(triY - 12) +
+                "\" font-family=\"Arial\" font-size=\"13\">3:4 / 3D</text>");
+
+            svg.AppendLine(
+                "<text x=\"" + Format(centerX + 1.5 * scale) +
+                "\" y=\"" + Format(centerY + 18) +
+                "\" font-family=\"Arial\" font-size=\"11\">3</text>");
+
+            svg.AppendLine(
+                "<text x=\"" + Format(triX + 8) +
+                "\" y=\"" + Format(centerY - 2.0 * scale) +
+                "\" font-family=\"Arial\" font-size=\"11\">4</text>");
+
+            // Spiral.
             StringBuilder spiralPath = new StringBuilder();
             double maxAngle = 6.0 * Math.PI;
             int samples = 360;
@@ -152,7 +210,6 @@ namespace NP.NumericalModel.Visualization
             {
                 double a = maxAngle * i / samples;
                 Point2D point = spiral.PointAt(a);
-
                 double sx = centerX + point.X * scale;
                 double sy = centerY - point.Y * scale;
 
@@ -170,13 +227,11 @@ namespace NP.NumericalModel.Visualization
                 "<path d=\"" + spiralPath.ToString() +
                 "\" fill=\"none\" stroke=\"#777\" stroke-width=\"1.6\" />");
 
-            // Mark the 360-degree transitions and their conceptual 5:6 relation.
             double[] ringAngles = new double[] { 0.0, 2.0 * Math.PI, 4.0 * Math.PI, 6.0 * Math.PI };
 
             for (i = 0; i < ringAngles.Length; i++)
             {
-                double ringAngle = ringAngles[i];
-                Point2D ringPoint = spiral.PointAt(ringAngle);
+                Point2D ringPoint = spiral.PointAt(ringAngles[i]);
                 double rx = centerX + ringPoint.X * scale;
                 double ry = centerY - ringPoint.Y * scale;
 
@@ -192,7 +247,7 @@ namespace NP.NumericalModel.Visualization
                     Format(i) + "×360°</text>");
             }
 
-            // Trigonometric waves continue from the positive X axis.
+            // Horizontal waves on the positive X direction.
             double waveStartX = centerX;
             double waveEndX = width - 25.0;
             double waveBaseY = centerY;
@@ -203,6 +258,8 @@ namespace NP.NumericalModel.Visualization
             StringBuilder cosinePath = new StringBuilder();
             StringBuilder tangentPath = new StringBuilder();
             StringBuilder cotangentPath = new StringBuilder();
+            StringBuilder secantPath = new StringBuilder();
+            StringBuilder cosecantPath = new StringBuilder();
 
             int waveSamples = 720;
 
@@ -211,20 +268,36 @@ namespace NP.NumericalModel.Visualization
                 double t = 4.0 * Math.PI * i / waveSamples;
                 double wx = waveStartX + t * waveScaleX;
 
-                AppendWavePoint(sinePath, wx, waveBaseY - Math.Sin(t) * waveScaleY, i == 0, false);
-                AppendWavePoint(cosinePath, wx, waveBaseY - Math.Cos(t) * waveScaleY, i == 0, false);
+                AppendWavePoint(sinePath, wx, waveBaseY - Math.Sin(t) * waveScaleY, i == 0);
+                AppendWavePoint(cosinePath, wx, waveBaseY - Math.Cos(t) * waveScaleY, i == 0);
 
                 double tan = Math.Tan(t);
                 if (Math.Abs(Math.Cos(t)) > 0.08)
-                    AppendWavePoint(tangentPath, wx, waveBaseY - Clamp(tan, -4.0, 4.0) * waveScaleY * 0.25, i == 0, false);
+                    AppendWavePoint(tangentPath, wx,
+                        waveBaseY - Clamp(tan, -4.0, 4.0) * waveScaleY * 0.25, i == 0);
                 else
                     tangentPath.Append(" M ");
 
                 double cot = 1.0 / Math.Tan(t);
                 if (Math.Abs(Math.Sin(t)) > 0.08)
-                    AppendWavePoint(cotangentPath, wx, waveBaseY - Clamp(cot, -4.0, 4.0) * waveScaleY * 0.25, i == 0, false);
+                    AppendWavePoint(cotangentPath, wx,
+                        waveBaseY - Clamp(cot, -4.0, 4.0) * waveScaleY * 0.25, i == 0);
                 else
                     cotangentPath.Append(" M ");
+
+                double sec = 1.0 / Math.Cos(t);
+                if (Math.Abs(Math.Cos(t)) > 0.08)
+                    AppendWavePoint(secantPath, wx,
+                        waveBaseY - Clamp(sec, -4.0, 4.0) * waveScaleY * 0.18, i == 0);
+                else
+                    secantPath.Append(" M ");
+
+                double csc = 1.0 / Math.Sin(t);
+                if (Math.Abs(Math.Sin(t)) > 0.08)
+                    AppendWavePoint(cosecantPath, wx,
+                        waveBaseY - Clamp(csc, -4.0, 4.0) * waveScaleY * 0.18, i == 0);
+                else
+                    cosecantPath.Append(" M ");
             }
 
             svg.AppendLine(
@@ -244,11 +317,54 @@ namespace NP.NumericalModel.Visualization
                 "\" fill=\"none\" stroke=\"#a64\" stroke-width=\"1.4\" />");
 
             svg.AppendLine(
+                "<path d=\"" + secantPath.ToString() +
+                "\" fill=\"none\" stroke=\"#a4a\" stroke-width=\"1.2\" />");
+
+            svg.AppendLine(
+                "<path d=\"" + cosecantPath.ToString() +
+                "\" fill=\"none\" stroke=\"#4aa\" stroke-width=\"1.2\" />");
+
+            svg.AppendLine(
                 "<text x=\"" + Format(waveStartX + 15) +
                 "\" y=\"" + Format(waveBaseY - waveScaleY - 10) +
-                "\" font-family=\"Arial\" font-size=\"12\">sin / cos / tan / cot</text>");
+                "\" font-family=\"Arial\" font-size=\"12\">" +
+                "sin / cos / tan / cot / sec / csc</text>");
 
-            // 3D-like line.
+            // Vertical waves along the positive Y direction.
+            double verticalStartY = centerY;
+            double verticalEndY = 90.0;
+            double verticalScaleY = (verticalStartY - verticalEndY) / (4.0 * Math.PI);
+            double verticalBaseX = centerX;
+            double verticalScaleX = scale * 0.55;
+
+            StringBuilder verticalSine = new StringBuilder();
+            StringBuilder verticalCosine = new StringBuilder();
+
+            for (i = 0; i <= waveSamples; i++)
+            {
+                double t = 4.0 * Math.PI * i / waveSamples;
+                double vy = verticalStartY - t * verticalScaleY;
+
+                AppendWavePoint(verticalSine, verticalBaseX + Math.Sin(t) * verticalScaleX,
+                    vy, i == 0);
+                AppendWavePoint(verticalCosine, verticalBaseX + Math.Cos(t) * verticalScaleX,
+                    vy, i == 0);
+            }
+
+            svg.AppendLine(
+                "<path d=\"" + verticalSine.ToString() +
+                "\" fill=\"none\" stroke=\"#d55\" stroke-width=\"1.6\" />");
+
+            svg.AppendLine(
+                "<path d=\"" + verticalCosine.ToString() +
+                "\" fill=\"none\" stroke=\"#55d\" stroke-width=\"1.6\" />");
+
+            svg.AppendLine(
+                "<text x=\"" + Format(verticalBaseX + 20) +
+                "\" y=\"96\" font-family=\"Arial\" font-size=\"11\">" +
+                "vertical sin / cos</text>");
+
+            // Projected 3D line from the model, shown beside the construction.
             Point2D projectedStart = Project(line.Start, centerX, centerY, scale);
             Point2D projectedEnd = Project(line.End, centerX, centerY, scale);
 
@@ -269,27 +385,17 @@ namespace NP.NumericalModel.Visualization
                 "\" cy=\"" + Format(projectedEnd.Y) +
                 "\" r=\"6\" fill=\"#111\" />");
 
-            svg.AppendLine(
-                "<text x=\"" + Format(projectedStart.X + 10) +
-                "\" y=\"" + Format(projectedStart.Y - 10) +
-                "\" font-family=\"Arial\" font-size=\"13\">3D origin</text>");
-
-            svg.AppendLine(
-                "<text x=\"" + Format(projectedEnd.X + 10) +
-                "\" y=\"" + Format(projectedEnd.Y - 10) +
-                "\" font-family=\"Arial\" font-size=\"13\">3:4 → 3D</text>");
-
-            // Numerical information.
+            // Information box.
             svg.AppendLine(
                 "<rect x=\"20\" y=\"" + Format(height - 105) +
-                "\" width=\"350\" height=\"75\" rx=\"8\" " +
+                "\" width=\"500\" height=\"75\" rx=\"8\" " +
                 "fill=\"white\" stroke=\"#444\" />");
 
             svg.AppendLine(
                 "<text x=\"35\" y=\"" + Format(height - 78) +
                 "\" font-family=\"Arial\" font-size=\"14\">Ratio: " +
                 EscapeXml(ratio.ToString()) + " = " +
-                Format(ratio.DecimalValue) + "</text>");
+                Format(ratio.DecimalValue) + " | 3:4 / 3D construction</text>");
 
             svg.AppendLine(
                 "<text x=\"35\" y=\"" + Format(height - 55) +
@@ -300,7 +406,7 @@ namespace NP.NumericalModel.Visualization
             svg.AppendLine(
                 "<text x=\"35\" y=\"" + Format(height - 32) +
                 "\" font-family=\"Arial\" font-size=\"14\">" +
-                "Spiral/ring transition: 360° → next ring, conceptual 5:6</text>");
+                "360° → next spiral ring | conceptual 5:6 transition</text>");
 
             svg.AppendLine(
                 "<text x=\"" + Format(width - 20) +
@@ -317,8 +423,7 @@ namespace NP.NumericalModel.Visualization
             StringBuilder path,
             double x,
             double y,
-            bool first,
-            bool unused)
+            bool first)
         {
             if (first)
                 path.Append("M ");
