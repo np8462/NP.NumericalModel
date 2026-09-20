@@ -17,11 +17,11 @@ namespace NP.NumericalModel.Tests
                 new Ratio(2, 7));
 
             Assert.AreEqual(44L, result.Numerator);
-            Assert.AreEqual(49L, result.Denominator);
+            Assert.AreEqual(7L, result.Denominator);
         }
 
         [TestMethod]
-        public void CombinesFortyTwoOverSevenAndTwoOverSevenAsReducedRatio()
+        public void PreservesExactComponentSumValue()
         {
             RatioComposer composer = new RatioComposer();
 
@@ -31,6 +31,7 @@ namespace NP.NumericalModel.Tests
 
             Assert.AreEqual(44L, result.Numerator);
             Assert.AreEqual(7L, result.Denominator);
+            Assert.AreEqual(44.0 / 7.0, result.DecimalValue, 0.0000000001);
         }
 
         [TestMethod]
