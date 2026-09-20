@@ -44,6 +44,7 @@
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="DerivedRelationTests.cs" />
     <Compile Include="PatternAnalyzerTests.cs" />
+    <Compile Include="RatioComposerTests.cs" />
     <Compile Include="RelationAnalyzerTests.cs" />
     <Compile Include="StructuralModelTests.cs" />
     <ProjectReference Include="..\..\src\NP.NumericalModel\NP.NumericalModel.csproj">
