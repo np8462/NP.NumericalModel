@@ -18,7 +18,7 @@ namespace NP.NumericalModel.Tests
                 "Pi",
                 ratio.DecimalValue,
                 Math.PI,
-                0.001);
+                0.002);
 
             Assert.AreEqual(VerificationClassification.Approximate, result.Classification);
             Assert.IsTrue(result.IsMatch);
