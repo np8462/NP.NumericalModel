@@ -142,13 +142,16 @@ namespace NP.NumericalModel.Visualization
                 "\" y=\"" + Format(py - 8) +
                 "\" font-family=\"Arial\" font-size=\"13\">π/4</text>");
 
-            // 3:4 right-triangle / 3D-like construction anchored to the circle.
+            // 3:4 right-triangle / 3D-like construction kept inside the circle.
+            // The 3:4:5 proportion is scaled so the construction stays within
+            // the circle instead of reaching/touching its circumference.
             double triA = centerX;
             double triB = centerY;
-            double triX = centerX + 3.0 * scale;
-            double triY = centerY - 4.0 * scale;
-            double triDepthX = triX - 0.9 * scale;
-            double triDepthY = triY + 0.7 * scale;
+            double triRadius = circleRadius * 0.80;
+            double triX = centerX + triRadius * 3.0 / 5.0;
+            double triY = centerY - triRadius * 4.0 / 5.0;
+            double triDepthX = triX - triRadius * 0.18;
+            double triDepthY = triY + triRadius * 0.14;
 
             svg.AppendLine(
                 "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
