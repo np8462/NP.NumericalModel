@@ -38,6 +38,7 @@
     <Compile Include="FactorRelationTests.cs" />
     <Compile Include="InterpretationDefinitionFactoryTests.cs" />
     <Compile Include="InterpretationTests.cs" />
+    <Compile Include="RatioTests.cs" />
     <Compile Include="RelationAnalyzerTests.cs" />
     <Compile Include="StructuralModelTests.cs" />
     <ProjectReference Include="..\..\src\NP.NumericalModel\NP.NumericalModel.csproj">
