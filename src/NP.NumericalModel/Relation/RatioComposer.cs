@@ -20,6 +20,11 @@ namespace NP.NumericalModel.Relation
             long denominator =
                 left.Denominator * right.Denominator;
 
+            long gcd = GreatestCommonDivisor(numerator, denominator);
+
+            numerator /= gcd;
+            denominator /= gcd;
+
             return new Ratio(numerator, denominator);
         }
 
@@ -52,6 +57,21 @@ namespace NP.NumericalModel.Relation
             }
 
             return result;
+        }
+
+        private long GreatestCommonDivisor(long left, long right)
+        {
+            left = Math.Abs(left);
+            right = Math.Abs(right);
+
+            while (right != 0)
+            {
+                long remainder = left % right;
+                left = right;
+                right = remainder;
+            }
+
+            return left;
         }
     }
 }
