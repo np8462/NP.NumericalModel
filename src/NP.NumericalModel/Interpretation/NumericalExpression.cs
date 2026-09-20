@@ -9,7 +9,7 @@ namespace NP.NumericalModel.Interpretation
     {
         private readonly NumericalExpression left;
         private readonly NumericalExpression right;
-        private readonly Func<double, double> binaryFunction;
+        private readonly Func<double, double, double> binaryFunction;
         private readonly Func<double, double> unaryFunction;
         private readonly double constantValue;
         private readonly string text;
