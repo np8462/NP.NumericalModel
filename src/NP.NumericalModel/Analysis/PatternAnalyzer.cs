@@ -26,6 +26,32 @@ namespace NP.NumericalModel.Analysis
                 true);
         }
 
+        public PatternMatch AnalyzeReconstruction(DerivedRelation relation)
+        {
+            if (relation == null) throw new ArgumentNullException("relation");
+
+            long reconstructed =
+                relation.WholePart * relation.Denominator
+                + relation.Remainder;
+
+            bool valid =
+                reconstructed == relation.Numerator
+                && Math.Abs(relation.Remainder) < Math.Abs(relation.Denominator);
+
+            if (valid)
+            {
+                return new PatternMatch(
+                    "NumeratorReconstruction",
+                    "The whole part and remainder reconstruct the original numerator.",
+                    true);
+            }
+
+            return new PatternMatch(
+                "NumeratorReconstruction",
+                "The whole part and remainder do not reconstruct the original numerator.",
+                false);
+        }
+
         public PatternMatch Analyze(Ratio ratio)
         {
             if (ratio == null) throw new ArgumentNullException("ratio");
