@@ -75,6 +75,7 @@
     <Compile Include="Interpretation\NumericalRepresentation.cs" />
     <Compile Include="Interpretation\RelationChain.cs" />
     <Compile Include="Interpretation\SegmentDivision.cs" />
+    <Compile Include="Interpretation\RealValue.cs" />
     <Compile Include="NibbleModel.cs" />
     <Compile Include="NibblePair.cs" />
     <Compile Include="NumericalExpansion17.cs" />
