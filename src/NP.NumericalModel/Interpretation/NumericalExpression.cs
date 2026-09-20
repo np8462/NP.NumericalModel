@@ -13,6 +13,8 @@ namespace NP.NumericalModel.Interpretation
         private readonly Func<double, double> unaryFunction;
         private readonly double constantValue;
         private readonly string text;
+        private readonly string operation;
+        private readonly int precedence;
 
         public string Text { get { return text; } }
 
@@ -34,13 +36,16 @@ namespace NP.NumericalModel.Interpretation
         {
             constantValue = value;
             this.text = text;
+            precedence = 3;
         }
 
         private NumericalExpression(
             NumericalExpression left,
             NumericalExpression right,
             Func<double, double, double> function,
-            string text)
+            string operation,
+            string text,
+            int precedence)
         {
             if (left == null) throw new ArgumentNullException("left");
             if (right == null) throw new ArgumentNullException("right");
@@ -49,12 +54,15 @@ namespace NP.NumericalModel.Interpretation
             this.left = left;
             this.right = right;
             binaryFunction = function;
+            this.operation = operation;
             this.text = text;
+            this.precedence = precedence;
         }
 
         private NumericalExpression(
             NumericalExpression operand,
             Func<double, double> function,
+            string operation,
             string text)
         {
             if (operand == null) throw new ArgumentNullException("operand");
@@ -62,7 +70,9 @@ namespace NP.NumericalModel.Interpretation
 
             left = operand;
             unaryFunction = function;
+            this.operation = operation;
             this.text = text;
+            precedence = 3;
         }
 
         public static NumericalExpression Constant(double value, string text)
@@ -73,36 +83,93 @@ namespace NP.NumericalModel.Interpretation
 
         public NumericalExpression Add(NumericalExpression other)
         {
-            return Binary(other, "+", delegate(double a, double b) { return a + b; });
+            return Binary(other, "+", delegate(double a, double b) { return a + b; }, 1);
         }
 
         public NumericalExpression Subtract(NumericalExpression other)
         {
-            return Binary(other, "-", delegate(double a, double b) { return a - b; });
+            return Binary(other, "-", delegate(double a, double b) { return a - b; }, 1);
         }
 
         public NumericalExpression Multiply(NumericalExpression other)
         {
-            return Binary(other, "*", delegate(double a, double b) { return a * b; });
+            return Binary(other, "*", delegate(double a, double b) { return a * b; }, 2);
         }
 
         public NumericalExpression Divide(NumericalExpression other)
         {
-            return Binary(other, "/", delegate(double a, double b) { return a / b; });
+            return Binary(other, "/", delegate(double a, double b) { return a / b; }, 2);
         }
 
         private NumericalExpression Binary(
             NumericalExpression other,
             string operation,
-            Func<double, double, double> function)
+            Func<double, double, double> function,
+            int precedence)
         {
             if (other == null) throw new ArgumentNullException("other");
+
+            string leftText = FormatOperand(this, false, operation);
+            string rightText = FormatOperand(other, true, operation);
 
             return new NumericalExpression(
                 this,
                 other,
                 function,
-                "(" + Text + " " + operation + " " + other.Text + ")");
+                operation,
+                "(" + leftText + " " + operation + " " + rightText + ")",
+                precedence);
+        }
+
+        private static string FormatOperand(
+            NumericalExpression operand,
+            bool isRight,
+            string parentOperation)
+        {
+            bool needsParentheses = operand.precedence < GetPrecedence(parentOperation);
+
+            if (!needsParentheses && isRight && operand.precedence == GetPrecedence(parentOperation))
+            {
+                if (parentOperation == "-" || parentOperation == "/")
+                    needsParentheses = true;
+            }
+
+            if (needsParentheses)
+                return "(" + operand.Text + ")";
+
+            return RemoveOuterParentheses(operand.Text);
+        }
+
+        private static int GetPrecedence(string operation)
+        {
+            if (operation == "+" || operation == "-")
+                return 1;
+
+            return 2;
+        }
+
+        private static string RemoveOuterParentheses(string value)
+        {
+            if (value == null || value.Length < 2)
+                return value;
+
+            if (value[0] != '(' || value[value.Length - 1] != ')')
+                return value;
+
+            int depth = 0;
+            int i;
+            for (i = 0; i < value.Length; i++)
+            {
+                if (value[i] == '(')
+                    depth++;
+                else if (value[i] == ')')
+                    depth--;
+
+                if (depth == 0 && i < value.Length - 1)
+                    return value;
+            }
+
+            return value.Substring(1, value.Length - 2);
         }
 
         public NumericalExpression Apply(
@@ -115,6 +182,7 @@ namespace NP.NumericalModel.Interpretation
             return new NumericalExpression(
                 this,
                 function,
+                operation,
                 operation + "(" + Text + ")");
         }
 
