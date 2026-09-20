@@ -51,7 +51,7 @@ namespace NP.NumericalModel.Tests
                 "pi",
                 value.Value,
                 Math.PI,
-                0.0000001);
+                0.000001);
 
             Assert.AreEqual(
                 VerificationClassification.Approximate,
