@@ -57,6 +57,8 @@
     <Compile Include="ByteSample.cs" />
     <Compile Include="Relation\Ratio.cs" />
     <Compile Include="Relation\RatioDecomposition.cs" />
+    <Compile Include="Integration\RatioVerification.cs" />
+    <Compile Include="Integration\RatioVerificationResult.cs" />
     <Compile Include="Reference\ReferenceMatcher.cs" />
     <Compile Include="Reference\VerificationClassification.cs" />
     <Compile Include="Reference\VerificationResult.cs" />
