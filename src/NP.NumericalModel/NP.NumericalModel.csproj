@@ -34,6 +34,8 @@
   <ItemGroup>
     <Compile Include="Analysis\AnalysisState.cs" />
     <Compile Include="Analysis\DerivedRelation.cs" />
+    <Compile Include="Analysis\PatternMatch.cs" />
+    <Compile Include="Analysis\PatternAnalyzer.cs" />
     <Compile Include="Analysis\RatioRelationDeriver.cs" />
     <Compile Include="Analysis\ConceptualRelationAnalyzer.cs" />
     <Compile Include="Analysis\ConceptualRelationGraph.cs" />
