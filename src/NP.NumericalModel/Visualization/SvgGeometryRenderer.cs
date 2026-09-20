@@ -146,7 +146,9 @@ namespace NP.NumericalModel.Visualization
             // The red 3-segment lies exactly on the horizontal X axis.
             double triA = centerX;
             double triB = centerY;
-            double triRadius = circleRadius * 0.80;
+            // Use the circle radius itself as the 3:4:5 hypotenuse,
+            // so the triangle's outer vertex lies exactly on the circle.
+            double triRadius = circleRadius;
 
             double triX = centerX + triRadius * 3.0 / 5.0;
             double triY = centerY - triRadius * 4.0 / 5.0;
@@ -188,8 +190,9 @@ namespace NP.NumericalModel.Visualization
 
             // 3:4 direction in the third quadrant.
             // Only the thick spatial line is kept here.
-            double thirdX = centerX - triRadius * 3.0 / 5.0;
-            double thirdY = centerY + triRadius * 4.0 / 5.0;
+            double thirdRadius = circleRadius * 0.80;
+            double thirdX = centerX - thirdRadius * 3.0 / 5.0;
+            double thirdY = centerY + thirdRadius * 4.0 / 5.0;
 
             svg.AppendLine(
                 "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
@@ -197,7 +200,7 @@ namespace NP.NumericalModel.Visualization
                 "\" stroke=\"#111\" stroke-width=\"4\" />");
 
             // Extended dashed continuation toward the next spiral/ring paradigm.
-            double continuationLength = triRadius * 1.15;
+            double continuationLength = thirdRadius * 1.15;
             double dx = thirdX - triA;
             double dy = thirdY - triB;
             double length = Math.Sqrt(dx * dx + dy * dy);
@@ -224,13 +227,13 @@ namespace NP.NumericalModel.Visualization
                 "\" text-anchor=\"end\" font-family=\"Arial\" font-size=\"13\">3:4</text>");
 
             svg.AppendLine(
-                "<text x=\"" + Format(centerX - triRadius * 0.30) +
-                "\" y=\"" + Format(centerY + triRadius * 0.12) +
+                "<text x=\"" + Format(centerX - thirdRadius * 0.30) +
+                "\" y=\"" + Format(centerY + thirdRadius * 0.12) +
                 "\" font-family=\"Arial\" font-size=\"11\">3</text>");
 
             svg.AppendLine(
                 "<text x=\"" + Format(thirdX - 10) +
-                "\" y=\"" + Format(centerY + triRadius * 0.55) +
+                "\" y=\"" + Format(centerY + thirdRadius * 0.55) +
                 "\" font-family=\"Arial\" font-size=\"11\">4</text>");
 
                         // Spiral.
