@@ -142,46 +142,35 @@ namespace NP.NumericalModel.Visualization
                 "\" y=\"" + Format(py - 8) +
                 "\" font-family=\"Arial\" font-size=\"13\">π/4</text>");
 
-            // 3:4 right-triangle / 3D-like construction in the
-            // third quadrant: 180° < angle < 270°.
-            // SVG Y grows downward, so mathematical negative Y is screen-positive Y.
+            // 3:4 construction in the third quadrant.
+            // Keep only the main thick 3:4 line; its dashed continuation
+            // extends toward the next spiral paradigm/ring.
             double triA = centerX;
             double triB = centerY;
             double triRadius = circleRadius * 0.80;
             double triX = centerX - triRadius * 3.0 / 5.0;
             double triY = centerY + triRadius * 4.0 / 5.0;
-            double triDepthX = triX + triRadius * 0.18;
-            double triDepthY = triY - triRadius * 0.14;
-
-            svg.AppendLine(
-                "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
-                "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triB) +
-                "\" stroke=\"#111\" stroke-width=\"2.5\" />");
-
-            svg.AppendLine(
-                "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triB) +
-                "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triY) +
-                "\" stroke=\"#111\" stroke-width=\"2.5\" />");
 
             svg.AppendLine(
                 "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
                 "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triY) +
-                "\" stroke=\"#111\" stroke-width=\"3\" />");
+                "\" stroke=\"#111\" stroke-width=\"4\" />");
+
+            double continuationLength = triRadius * 0.55;
+            double dx = triX - triA;
+            double dy = triY - triB;
+            double length = Math.Sqrt(dx * dx + dy * dy);
+            double ux = dx / length;
+            double uy = dy / length;
+
+            double contX = triX + ux * continuationLength;
+            double contY = triY + uy * continuationLength;
 
             svg.AppendLine(
                 "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triY) +
-                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY) +
-                "\" stroke=\"#333\" stroke-width=\"2\" />");
-
-            svg.AppendLine(
-                "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triB) +
-                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY) +
-                "\" stroke=\"#333\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\" />");
-
-            svg.AppendLine(
-                "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
-                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY) +
-                "\" stroke=\"#333\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\" />");
+                "\" x2=\"" + Format(contX) + "\" y2=\"" + Format(contY) +
+                "\" stroke=\"#333\" stroke-width=\"2\" " +
+                "stroke-dasharray=\"7,5\" />");
 
             svg.AppendLine(
                 "<circle cx=\"" + Format(triX) +
@@ -189,21 +178,21 @@ namespace NP.NumericalModel.Visualization
                 "\" r=\"6\" fill=\"#111\" />");
 
             svg.AppendLine(
-                "<text x=\"" + Format(triX + 12) +
-                "\" y=\"" + Format(triY - 12) +
-                "\" font-family=\"Arial\" font-size=\"13\">3:4 / 3D</text>");
+                "<text x=\"" + Format(triX - 12) +
+                "\" y=\"" + Format(triY + 18) +
+                "\" text-anchor=\"end\" font-family=\"Arial\" font-size=\"13\">3:4</text>");
 
             svg.AppendLine(
-                "<text x=\"" + Format(centerX + 1.5 * scale) +
-                "\" y=\"" + Format(centerY + 18) +
+                "<text x=\"" + Format(centerX - triRadius * 0.30) +
+                "\" y=\"" + Format(centerY + triRadius * 0.12) +
                 "\" font-family=\"Arial\" font-size=\"11\">3</text>");
 
             svg.AppendLine(
-                "<text x=\"" + Format(triX + 8) +
-                "\" y=\"" + Format(centerY - 2.0 * scale) +
+                "<text x=\"" + Format(triX - 10) +
+                "\" y=\"" + Format(centerY + triRadius * 0.55) +
                 "\" font-family=\"Arial\" font-size=\"11\">4</text>");
 
-            // Spiral.
+                        // Spiral.
             StringBuilder spiralPath = new StringBuilder();
             double maxAngle = 6.0 * Math.PI;
             int samples = 360;
