@@ -142,16 +142,16 @@ namespace NP.NumericalModel.Visualization
                 "\" y=\"" + Format(py - 8) +
                 "\" font-family=\"Arial\" font-size=\"13\">π/4</text>");
 
-            // 3:4 right-triangle / 3D-like construction kept inside the circle.
-            // The 3:4:5 proportion is scaled so the construction stays within
-            // the circle instead of reaching/touching its circumference.
+            // 3:4 right-triangle / 3D-like construction in the
+            // third quadrant: 180° < angle < 270°.
+            // SVG Y grows downward, so mathematical negative Y is screen-positive Y.
             double triA = centerX;
             double triB = centerY;
             double triRadius = circleRadius * 0.80;
-            double triX = centerX + triRadius * 3.0 / 5.0;
-            double triY = centerY - triRadius * 4.0 / 5.0;
-            double triDepthX = triX - triRadius * 0.18;
-            double triDepthY = triY + triRadius * 0.14;
+            double triX = centerX - triRadius * 3.0 / 5.0;
+            double triY = centerY + triRadius * 4.0 / 5.0;
+            double triDepthX = triX + triRadius * 0.18;
+            double triDepthY = triY - triRadius * 0.14;
 
             svg.AppendLine(
                 "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
@@ -175,7 +175,7 @@ namespace NP.NumericalModel.Visualization
 
             svg.AppendLine(
                 "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triB) +
-                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY + 4.0 * scale) +
+                "\" x2=\"" + Format(triDepthX) + "\" y2=\"" + Format(triDepthY) +
                 "\" stroke=\"#333\" stroke-width=\"1.5\" stroke-dasharray=\"5,4\" />");
 
             svg.AppendLine(
