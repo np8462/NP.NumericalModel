@@ -39,7 +39,7 @@ namespace NP.NumericalModel.Interpretation
         private NumericalExpression(
             NumericalExpression left,
             NumericalExpression right,
-            Func<double, double> function,
+            Func<double, double, double> function,
             string text)
         {
             if (left == null) throw new ArgumentNullException("left");
