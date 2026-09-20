@@ -62,6 +62,7 @@
     <Compile Include="Relation\Ratio.cs" />
     <Compile Include="Relation\RatioDecomposition.cs" />
     <Compile Include="Relation\RatioComposer.cs" />
+    <Compile Include="Relation\RatioComposition.cs" />
     <Compile Include="Integration\RatioVerification.cs" />
     <Compile Include="Integration\RatioVerificationResult.cs" />
     <Compile Include="Reference\ReferenceMatcher.cs" />
