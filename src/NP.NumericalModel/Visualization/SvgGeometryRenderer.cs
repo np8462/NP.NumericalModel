@@ -142,35 +142,29 @@ namespace NP.NumericalModel.Visualization
                 "\" y=\"" + Format(py - 8) +
                 "\" font-family=\"Arial\" font-size=\"13\">π/4</text>");
 
-            // 3:4 construction in the third quadrant.
-            // Keep only the main thick 3:4 line; its dashed continuation
-            // extends toward the next spiral paradigm/ring.
+            // 3:4 construction in the first quadrant.
+            // The red 3-segment lies exactly on the horizontal X axis.
             double triA = centerX;
             double triB = centerY;
             double triRadius = circleRadius * 0.80;
-            double triX = centerX - triRadius * 3.0 / 5.0;
-            double triY = centerY + triRadius * 4.0 / 5.0;
+
+            double triX = centerX + triRadius * 3.0 / 5.0;
+            double triY = centerY - triRadius * 4.0 / 5.0;
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triB) +
+                "\" stroke=\"#c33\" stroke-width=\"4\" />");
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triY) +
+                "\" stroke=\"#333\" stroke-width=\"3\" />");
 
             svg.AppendLine(
                 "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
                 "\" x2=\"" + Format(triX) + "\" y2=\"" + Format(triY) +
                 "\" stroke=\"#111\" stroke-width=\"4\" />");
-
-            double continuationLength = triRadius * 0.55;
-            double dx = triX - triA;
-            double dy = triY - triB;
-            double length = Math.Sqrt(dx * dx + dy * dy);
-            double ux = dx / length;
-            double uy = dy / length;
-
-            double contX = triX + ux * continuationLength;
-            double contY = triY + uy * continuationLength;
-
-            svg.AppendLine(
-                "<line x1=\"" + Format(triX) + "\" y1=\"" + Format(triY) +
-                "\" x2=\"" + Format(contX) + "\" y2=\"" + Format(contY) +
-                "\" stroke=\"#333\" stroke-width=\"2\" " +
-                "stroke-dasharray=\"7,5\" />");
 
             svg.AppendLine(
                 "<circle cx=\"" + Format(triX) +
@@ -178,8 +172,55 @@ namespace NP.NumericalModel.Visualization
                 "\" r=\"6\" fill=\"#111\" />");
 
             svg.AppendLine(
-                "<text x=\"" + Format(triX - 12) +
-                "\" y=\"" + Format(triY + 18) +
+                "<text x=\"" + Format(centerX + triRadius * 0.30) +
+                "\" y=\"" + Format(centerY + 18) +
+                "\" text-anchor=\"middle\" font-family=\"Arial\" font-size=\"11\">3</text>");
+
+            svg.AppendLine(
+                "<text x=\"" + Format(triX + 10) +
+                "\" y=\"" + Format(centerY - triRadius * 0.40) +
+                "\" font-family=\"Arial\" font-size=\"11\">4</text>");
+
+            svg.AppendLine(
+                "<text x=\"" + Format(triX + 12) +
+                "\" y=\"" + Format(triY - 12) +
+                "\" font-family=\"Arial\" font-size=\"13\">3:4 / 3D</text>");
+
+            // 3:4 direction in the third quadrant.
+            // Only the thick spatial line is kept here.
+            double thirdX = centerX - triRadius * 3.0 / 5.0;
+            double thirdY = centerY + triRadius * 4.0 / 5.0;
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(triA) + "\" y1=\"" + Format(triB) +
+                "\" x2=\"" + Format(thirdX) + "\" y2=\"" + Format(thirdY) +
+                "\" stroke=\"#111\" stroke-width=\"4\" />");
+
+            // Extended dashed continuation toward the next spiral/ring paradigm.
+            double continuationLength = triRadius * 1.15;
+            double dx = thirdX - triA;
+            double dy = thirdY - triB;
+            double length = Math.Sqrt(dx * dx + dy * dy);
+            double ux = dx / length;
+            double uy = dy / length;
+
+            double contX = thirdX + ux * continuationLength;
+            double contY = thirdY + uy * continuationLength;
+
+            svg.AppendLine(
+                "<line x1=\"" + Format(thirdX) + "\" y1=\"" + Format(thirdY) +
+                "\" x2=\"" + Format(contX) + "\" y2=\"" + Format(contY) +
+                "\" stroke=\"#333\" stroke-width=\"2\" " +
+                "stroke-dasharray=\"7,5\" />");
+
+            svg.AppendLine(
+                "<circle cx=\"" + Format(thirdX) +
+                "\" cy=\"" + Format(thirdY) +
+                "\" r=\"6\" fill=\"#111\" />");
+
+            svg.AppendLine(
+                "<text x=\"" + Format(thirdX - 12) +
+                "\" y=\"" + Format(thirdY + 18) +
                 "\" text-anchor=\"end\" font-family=\"Arial\" font-size=\"13\">3:4</text>");
 
             svg.AppendLine(
@@ -188,7 +229,7 @@ namespace NP.NumericalModel.Visualization
                 "\" font-family=\"Arial\" font-size=\"11\">3</text>");
 
             svg.AppendLine(
-                "<text x=\"" + Format(triX - 10) +
+                "<text x=\"" + Format(thirdX - 10) +
                 "\" y=\"" + Format(centerY + triRadius * 0.55) +
                 "\" font-family=\"Arial\" font-size=\"11\">4</text>");
 
