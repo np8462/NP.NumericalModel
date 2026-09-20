@@ -121,6 +121,13 @@ namespace NP.NumericalModel.ConsoleSample
                 });
 
             demoGroups.Add(
+                "Geometry",
+                new List<DemoItem>
+                {
+                    new DemoItem("Geometry Model Demo", RunGeometryModelDemo)
+                });
+
+            demoGroups.Add(
                 "Visualization",
                 new List<DemoItem>
                 {
@@ -271,6 +278,11 @@ namespace NP.NumericalModel.ConsoleSample
         private void RunInterpretationDemo()
         {
             InterpretationDemo.Run();
+        }
+
+        private void RunGeometryModelDemo()
+        {
+            GeometryModelDemo.Run();
         }
 
         private void RunSvgDemo()
