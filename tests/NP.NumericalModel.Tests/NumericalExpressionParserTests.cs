@@ -115,7 +115,7 @@ namespace NP.NumericalModel.Tests
             NumericalExpressionParser parser = new NumericalExpressionParser();
 
             NumericalExpression result =
-                parser.Parse("5/6 / 2/3");
+                parser.Parse("(5/6) / (2/3)");
 
             Assert.AreEqual(5.0 / 4.0, result.Value, 0.0000000001);
         }
