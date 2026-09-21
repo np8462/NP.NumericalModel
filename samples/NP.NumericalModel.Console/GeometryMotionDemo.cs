@@ -576,40 +576,29 @@ namespace NP.NumericalModel.ConsoleSample
             double derivative = functionModel.Derivative(pointX);
             double area = functionModel.Integral(integralA, integralB);
 
-            // اطلاعات محاسباتی عمداً در فضای سفید پایینِ چپ نمودار قرار می‌گیرند
-            // تا با خود منحنی و فرمول‌های بالای فرم تداخل نداشته باشند.
-            float formulaX = left + 10.0f;
-            float formulaY = bottom - 70.0f;
-
-            g.FillRectangle(
-                Brushes.White,
-                formulaX - 5.0f,
-                formulaY - 5.0f,
-                330.0f,
-                65.0f);
-
             g.DrawString(
-                "مشتق: " + functionModel.DerivativeFormula +
-                "    |    f'(x) ≈ " + derivative.ToString("0.###"),
+                "فرمول مشتق: " + functionModel.DerivativeFormula +
+                "    |    تعریف: lim(h→0) [f(x+h)-f(x)]/h",
                 this.Font,
                 Brushes.DarkBlue,
-                formulaX,
-                formulaY);
+                left + 10,
+                top + 10);
 
             g.DrawString(
-                "انتگرال: " + functionModel.IntegralFormula +
+                "فرمول انتگرال: " + functionModel.IntegralFormula +
                 " = " + area.ToString("0.####"),
                 this.Font,
                 Brushes.DarkGreen,
-                formulaX,
-                formulaY + 21.0f);
+                left + 10,
+                top + 30);
 
             g.DrawString(
-                "تعریف مشتق: lim(h→0) [f(x+h)-f(x)]/h",
+                "f'(x) در نقطه = " + derivative.ToString("0.###") +
+                "    |    مساحت/انتگرال بازه = " + area.ToString("0.####"),
                 this.Font,
                 Brushes.Black,
-                formulaX,
-                formulaY + 42.0f);
+                left + 10,
+                top + 50);
 
             float px = MapX(pointX, left, right);
             float py = MapY(fx, yMin, yMax, top, bottom);
@@ -653,49 +642,26 @@ namespace NP.NumericalModel.ConsoleSample
                 px + 8,
                 py - 20);
 
-            double integralValue = functionModel.Integral(integralA, integralB);
-
-            using (SolidBrush formulaBackBrush =
-                new SolidBrush(Color.FromArgb(235, Color.White)))
-            {
-                g.FillRectangle(
-                    formulaBackBrush,
-                    left + 5,
-                    top + 3,
-                    335,
-                    82);
-            }
-
             g.DrawString(
-                "f(x) = " + functionModel.Formula,
+                "تابع: " + functionModel.Formula,
                 this.Font,
                 Brushes.DarkRed,
-                left + 12,
-                top + 7);
+                left + 10,
+                top + 5);
 
             g.DrawString(
-                "f'(x) ≈ " + derivative.ToString("0.####") +
-                "    در x = " + pointX.ToString("0.###"),
+                "مماس: y - f(a) = f'(a)(x-a)",
                 this.Font,
                 Brushes.DarkBlue,
-                left + 12,
-                top + 27);
+                left + 10,
+                top + 25);
 
             g.DrawString(
-                "مشتق: " + functionModel.DerivativeFormula,
+                "قاطع: h = " + secantH.ToString("0.###"),
                 this.Font,
-                Brushes.DarkBlue,
-                left + 12,
-                top + 47);
-
-            g.DrawString(
-                "∫[" + integralA.ToString("0.###") + "," +
-                integralB.ToString("0.###") + "] f(x)dx = " +
-                integralValue.ToString("0.####"),
-                this.Font,
-                Brushes.Purple,
-                left + 12,
-                top + 67);
+                Brushes.DarkGreen,
+                left + 10,
+                top + 45);
 
             g.DrawString(
                 "انتگرال و مساحت زیر منحنی",
@@ -1111,3 +1077,334 @@ namespace NP.NumericalModel.ConsoleSample
 
                 return ParsePrimary();
             }
+
+            private Node ParsePrimary()
+            {
+                SkipSpaces();
+
+                if (position >= text.Length)
+                    throw Error("انتظار یک عدد، x یا تابع وجود داشت.");
+
+                if (Match('('))
+                {
+                    Node inside = ParseExpression();
+                    Expect(')');
+                    return inside;
+                }
+
+                if (char.IsDigit(text[position]) || text[position] == '.')
+                    return new NumberNode(ParseNumber());
+
+                if (char.IsLetter(text[position]))
+                {
+                    string name = ParseName();
+
+                    if (string.Equals(name, "x", StringComparison.OrdinalIgnoreCase))
+                        return new VariableNode();
+
+                    if (string.Equals(name, "pi", StringComparison.OrdinalIgnoreCase))
+                        return new NumberNode(Math.PI);
+
+                    if (string.Equals(name, "e", StringComparison.OrdinalIgnoreCase))
+                        return new NumberNode(Math.E);
+
+                    SkipSpaces();
+
+                    if (Match('('))
+                    {
+                        Node argument = ParseExpression();
+                        Expect(')');
+                        return new FunctionNode(name, argument);
+                    }
+
+                    throw Error("تابع یا ثابت ناشناخته: " + name);
+                }
+
+                throw Error("نویسه نامعتبر: " + text[position]);
+            }
+
+            private bool IsImplicitMultiplication()
+            {
+                SkipSpaces();
+
+                if (position >= text.Length)
+                    return false;
+
+                char ch = text[position];
+
+                return ch == '(' ||
+                       ch == '.' ||
+                       char.IsDigit(ch) ||
+                       char.IsLetter(ch);
+            }
+
+            private double ParseNumber()
+            {
+                int start = position;
+                bool hasDigits = false;
+
+                while (position < text.Length &&
+                       char.IsDigit(text[position]))
+                {
+                    hasDigits = true;
+                    position++;
+                }
+
+                if (position < text.Length && text[position] == '.')
+                {
+                    position++;
+
+                    while (position < text.Length &&
+                           char.IsDigit(text[position]))
+                    {
+                        hasDigits = true;
+                        position++;
+                    }
+                }
+
+                if (!hasDigits)
+                    throw Error("عدد معتبر نیست.");
+
+                string value = text.Substring(start, position - start);
+                double result;
+
+                if (!double.TryParse(
+                    value,
+                    System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out result))
+                    throw Error("عدد نامعتبر: " + value);
+
+                return result;
+            }
+
+            private string ParseName()
+            {
+                int start = position;
+
+                while (position < text.Length &&
+                       (char.IsLetter(text[position]) ||
+                        char.IsDigit(text[position])))
+                    position++;
+
+                return text.Substring(start, position - start);
+            }
+
+            private void Expect(char ch)
+            {
+                SkipSpaces();
+
+                if (!Match(ch))
+                    throw Error("انتظار '" + ch + "' وجود داشت.");
+            }
+
+            private bool Match(char ch)
+            {
+                if (position < text.Length && text[position] == ch)
+                {
+                    position++;
+                    return true;
+                }
+
+                return false;
+            }
+
+            private void SkipSpaces()
+            {
+                while (position < text.Length &&
+                       char.IsWhiteSpace(text[position]))
+                    position++;
+            }
+
+            private FormatException Error(string message)
+            {
+                return new FormatException(message);
+            }
+
+            private abstract class Node
+            {
+                public abstract double Evaluate(double x);
+            }
+
+            private class NumberNode : Node
+            {
+                private double value;
+
+                public NumberNode(double value)
+                {
+                    this.value = value;
+                }
+
+                public override double Evaluate(double x)
+                {
+                    return value;
+                }
+            }
+
+            private class VariableNode : Node
+            {
+                public override double Evaluate(double x)
+                {
+                    return x;
+                }
+            }
+
+            private class UnaryNode : Node
+            {
+                private char operation;
+                private Node value;
+
+                public UnaryNode(char operation, Node value)
+                {
+                    this.operation = operation;
+                    this.value = value;
+                }
+
+                public override double Evaluate(double x)
+                {
+                    double v = value.Evaluate(x);
+
+                    if (operation == '-')
+                        return -v;
+
+                    return v;
+                }
+            }
+
+            private class BinaryNode : Node
+            {
+                private char operation;
+                private Node left;
+                private Node right;
+
+                public BinaryNode(char operation, Node left, Node right)
+                {
+                    this.operation = operation;
+                    this.left = left;
+                    this.right = right;
+                }
+
+                public override double Evaluate(double x)
+                {
+                    double a = left.Evaluate(x);
+                    double b = right.Evaluate(x);
+
+                    switch (operation)
+                    {
+                        case '+':
+                            return a + b;
+
+                        case '-':
+                            return a - b;
+
+                        case '*':
+                            return a * b;
+
+                        case '/':
+                            if (Math.Abs(b) < 0.000000000000001)
+                                return double.NaN;
+
+                            return a / b;
+
+                        case '^':
+                            return Math.Pow(a, b);
+
+                        default:
+                            return double.NaN;
+                    }
+                }
+            }
+
+            private class FunctionNode : Node
+            {
+                private string name;
+                private Node argument;
+
+                public FunctionNode(string name, Node argument)
+                {
+                    this.name = name;
+                    this.argument = argument;
+
+                    string normalized = name.ToLowerInvariant();
+
+                    if (normalized != "sin" &&
+                        normalized != "cos" &&
+                        normalized != "tan" &&
+                        normalized != "sqrt" &&
+                        normalized != "abs" &&
+                        normalized != "exp" &&
+                        normalized != "log" &&
+                        normalized != "ln" &&
+                        normalized != "log10")
+                        throw new FormatException(
+                            "تابع ناشناخته: " + name);
+                }
+
+                public override double Evaluate(double x)
+                {
+                    double value = argument.Evaluate(x);
+
+                    switch (name.ToLowerInvariant())
+                    {
+                        case "sin":
+                            return Math.Sin(value);
+
+                        case "cos":
+                            return Math.Cos(value);
+
+                        case "tan":
+                            return Math.Tan(value);
+
+                        case "sqrt":
+                            return value < 0.0 ? double.NaN : Math.Sqrt(value);
+
+                        case "abs":
+                            return Math.Abs(value);
+
+                        case "exp":
+                            return Math.Exp(value);
+
+                        case "log":
+                            return value <= 0.0 ? double.NaN : Math.Log(value);
+
+                        case "ln":
+                            return value <= 0.0 ? double.NaN : Math.Log(value);
+
+                        case "log10":
+                            return value <= 0.0 ? double.NaN : Math.Log10(value);
+
+                        default:
+                            throw new FormatException(
+                                "تابع ناشناخته: " + name);
+                    }
+                }
+            }
+        }
+
+        private class ListPointBuilder
+        {
+            private System.Collections.Generic.List<PointF> points;
+
+            public ListPointBuilder()
+            {
+                points =
+                    new System.Collections.Generic.List<PointF>();
+            }
+
+            public int Count
+            {
+                get { return points.Count; }
+            }
+
+            public void Add(PointF point)
+            {
+                points.Add(point);
+            }
+
+            public PointF[] ToArray()
+            {
+                return points.ToArray();
+            }
+        }
+    }
+}
