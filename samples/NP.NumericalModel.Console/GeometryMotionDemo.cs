@@ -851,11 +851,6 @@ namespace NP.NumericalModel.ConsoleSample
             public void Validate()
             {
                 parser.Parse();
-                double test = Evaluate(0.0);
-
-                if (double.IsNaN(test) || double.IsInfinity(test))
-                    throw new FormatException(
-                        "تابع در x = 0 مقدار معتبر تولید نمی‌کند.");
             }
 
             public double Evaluate(double x)
@@ -1123,7 +1118,8 @@ namespace NP.NumericalModel.ConsoleSample
                 int start = position;
 
                 while (position < text.Length &&
-                       char.IsLetter(text[position]))
+                       (char.IsLetter(text[position]) ||
+                        char.IsDigit(text[position])))
                     position++;
 
                 return text.Substring(start, position - start);
@@ -1263,6 +1259,20 @@ namespace NP.NumericalModel.ConsoleSample
                 {
                     this.name = name;
                     this.argument = argument;
+
+                    string normalized = name.ToLowerInvariant();
+
+                    if (normalized != "sin" &&
+                        normalized != "cos" &&
+                        normalized != "tan" &&
+                        normalized != "sqrt" &&
+                        normalized != "abs" &&
+                        normalized != "exp" &&
+                        normalized != "log" &&
+                        normalized != "ln" &&
+                        normalized != "log10")
+                        throw new FormatException(
+                            "تابع ناشناخته: " + name);
                 }
 
                 public override double Evaluate(double x)
