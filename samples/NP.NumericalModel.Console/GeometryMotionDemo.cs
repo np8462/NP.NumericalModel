@@ -316,6 +316,5 @@ namespace NP.NumericalModel.ConsoleSample
             g.FillEllipse(Brushes.Black, currentX - 5.0f,
                 currentY - 5.0f, 10.0f, 10.0f);
         }
-        }
     }
 }
