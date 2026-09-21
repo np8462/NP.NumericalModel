@@ -51,8 +51,8 @@ namespace NP.NumericalModel.ConsoleSample
             this.Text = "NP.NumericalModel - Geometry & Calculus";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Font = new Font("Tahoma", 9, FontStyle.Regular);
-            this.ClientSize = new Size(1120, 800);
-            this.MinimumSize = new Size(1000, 700);
+            this.ClientSize = new Size(1120, 700);
+            this.MinimumSize = new Size(1000, 620);
 
             unitCircle = new Circle(new Point2D(0.0, 0.0), 1.0);
             functionModel = new CalculusFunctionModel("x^2");
@@ -111,6 +111,7 @@ namespace NP.NumericalModel.ConsoleSample
             functionCombo.Items.Add("e^x");
             functionCombo.SelectedIndex = 0;
             functionCombo.Text = "x^2";
+            functionCombo.SelectedIndexChanged += new EventHandler(functionCombo_SelectedIndexChanged);
 
             functionExpressionBox = new TextBox();
             functionExpressionBox.Location = new Point(615, 38);
@@ -158,7 +159,7 @@ namespace NP.NumericalModel.ConsoleSample
 
             canvas = new Panel();
             canvas.Location = new Point(10, 140);
-            canvas.Size = new Size(1100, 645);
+            canvas.Size = new Size(1100, 545);
             canvas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom |
                             AnchorStyles.Left | AnchorStyles.Right;
             canvas.BackColor = Color.White;
@@ -262,6 +263,12 @@ namespace NP.NumericalModel.ConsoleSample
                 next = angleBar.Minimum;
 
             angleBar.Value = next;
+        }
+
+        private void functionCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (functionCombo.SelectedIndex >= 0)
+                functionExpressionBox.Text = functionCombo.SelectedItem.ToString();
         }
 
         private void applyFunctionButton_Click(object sender, EventArgs e)
@@ -567,6 +574,31 @@ namespace NP.NumericalModel.ConsoleSample
 
             double fx = functionModel.Evaluate(pointX);
             double derivative = functionModel.Derivative(pointX);
+            double area = functionModel.Integral(integralA, integralB);
+
+            g.DrawString(
+                "فرمول مشتق: " + functionModel.DerivativeFormula +
+                "    |    تعریف: lim(h→0) [f(x+h)-f(x)]/h",
+                this.Font,
+                Brushes.DarkBlue,
+                left + 10,
+                top + 10);
+
+            g.DrawString(
+                "فرمول انتگرال: " + functionModel.IntegralFormula +
+                " = " + area.ToString("0.####"),
+                this.Font,
+                Brushes.DarkGreen,
+                left + 10,
+                top + 30);
+
+            g.DrawString(
+                "f'(x) در نقطه = " + derivative.ToString("0.###") +
+                "    |    مساحت/انتگرال بازه = " + area.ToString("0.####"),
+                this.Font,
+                Brushes.Black,
+                left + 10,
+                top + 50);
 
             float px = MapX(pointX, left, right);
             float py = MapY(fx, yMin, yMax, top, bottom);
