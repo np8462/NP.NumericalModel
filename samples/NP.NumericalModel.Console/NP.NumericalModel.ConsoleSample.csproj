@@ -53,7 +53,9 @@
     <Compile Include="FactorialStateDemo.cs" />
     <Compile Include="FactorRelationDemo.cs" />
     <Compile Include="GeometryModelDemo.cs" />
-    <Compile Include="GeometryMotionDemo.cs" />
+    <Compile Include="GeometryMotionDemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PreviousTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="RelationAnalyzerDemo.cs" />

@@ -92,5 +92,39 @@ namespace NP.NumericalModel.Tests
                 Assert.IsTrue(true);
             }
         }
+
+        [TestMethod]
+        public void DiagnoseRatioComposer()
+        {
+            try
+            {
+                RatioComposer composer = new RatioComposer();
+
+                Ratio result = composer.Add(
+                    new Ratio(42, 7),
+                    new Ratio(2, 7));
+
+                Assert.AreEqual(44L, result.Numerator);
+                Assert.AreEqual(7L, result.Denominator);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    ex.GetType().FullName + ": "
+                    + ex.Message
+                    + " | Inner: "
+                    + (ex.InnerException == null
+                        ? "null"
+                        : ex.InnerException.GetType().FullName
+                            + ": " + ex.InnerException.Message),
+                    ex);
+            }
+        }
+
+        [TestMethod]
+        public void SimpleInvocationTest()
+        {
+            Assert.AreEqual(2, 1 + 1);
+        }
     }
 }

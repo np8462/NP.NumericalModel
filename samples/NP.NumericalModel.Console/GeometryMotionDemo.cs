@@ -392,18 +392,7 @@ namespace NP.NumericalModel.ConsoleSample
                 "°    x = " + orbitPoint.X.ToString("0.000") +
                 "    y = " + orbitPoint.Y.ToString("0.000");
 
-            calculusLabel.Text =
-                "f(x) = " + functionModel.Formula +
-                "    |    نقطه: (" + pointX.ToString("0.###") + ", " + y.ToString("0.###") + ")" +
-                "    |    f'(x) ≈ " + derivative.ToString("0.###") +
-                "    |    شیب مماس = " + derivative.ToString("0.###") +
-                "    |    ∫[" + integralA.ToString("0.###") + "," +
-                integralB.ToString("0.###") + "] f(x)dx = " + area.ToString("0.####") +
-                "\r\n" +
-                "فرمول مشتق: " + functionModel.DerivativeFormula +
-                "    |    تعریف: lim(h→0) [f(x+h)-f(x)]/h" +
-                "    |    فرمول انتگرال: " + functionModel.IntegralFormula +
-                "    |    روش عددی: Simpson";
+            calculusLabel.Text = "";
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -576,29 +565,40 @@ namespace NP.NumericalModel.ConsoleSample
             double derivative = functionModel.Derivative(pointX);
             double area = functionModel.Integral(integralA, integralB);
 
-            g.DrawString(
-                "فرمول مشتق: " + functionModel.DerivativeFormula +
-                "    |    تعریف: lim(h→0) [f(x+h)-f(x)]/h",
-                this.Font,
-                Brushes.DarkBlue,
-                left + 10,
-                top + 10);
+            // فرمول‌ها فقط در پایینِ سمت چپ ناحیه سفید نمودار نمایش داده می‌شوند.
+            // ابتدا همان ناحیه را کاملاً سفید می‌کنیم تا هیچ نوشته/خط قبلی باقی نماند.
+            float formulaX = right- 300.0f;
+            float formulaY = top-35.0f;
+            RectangleF formulaArea = new RectangleF(
+                formulaX - 5.0f,
+                formulaY - 5.0f,
+                385.0f,
+                58.0f);
+
+            g.FillRectangle(Brushes.White, formulaArea);
 
             g.DrawString(
-                "فرمول انتگرال: " + functionModel.IntegralFormula +
+                "مشتق: " + functionModel.DerivativeFormula +
+                "    |    f'(x) ≈ " + derivative.ToString("0.###"),
+                this.Font,
+                Brushes.DarkBlue,
+                formulaX + 20.0f,
+                formulaY+5.0f);
+
+            g.DrawString(
+                "انتگرال: " + functionModel.IntegralFormula +
                 " = " + area.ToString("0.####"),
                 this.Font,
                 Brushes.DarkGreen,
-                left + 10,
-                top + 30);
+                formulaX + 20.0f,
+                formulaY + 25.0f);
 
             g.DrawString(
-                "f'(x) در نقطه = " + derivative.ToString("0.###") +
-                "    |    مساحت/انتگرال بازه = " + area.ToString("0.####"),
+                "تعریف مشتق: lim(h→0) [f(x+h)-f(x)]/h",
                 this.Font,
                 Brushes.Black,
-                left + 10,
-                top + 50);
+                formulaX + 20.0f,
+                formulaY + 45.0f);
 
             float px = MapX(pointX, left, right);
             float py = MapY(fx, yMin, yMax, top, bottom);
@@ -647,21 +647,21 @@ namespace NP.NumericalModel.ConsoleSample
                 this.Font,
                 Brushes.DarkRed,
                 left + 10,
-                top + 5);
+                top-30);
 
             g.DrawString(
                 "مماس: y - f(a) = f'(a)(x-a)",
                 this.Font,
                 Brushes.DarkBlue,
                 left + 10,
-                top + 25);
+                top-10 );
 
             g.DrawString(
                 "قاطع: h = " + secantH.ToString("0.###"),
                 this.Font,
                 Brushes.DarkGreen,
                 left + 10,
-                top + 45);
+                top+10);
 
             g.DrawString(
                 "انتگرال و مساحت زیر منحنی",
