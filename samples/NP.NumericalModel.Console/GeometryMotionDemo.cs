@@ -50,8 +50,9 @@ namespace NP.NumericalModel.ConsoleSample
         {
             this.Text = "NP.NumericalModel - Geometry & Calculus";
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.ClientSize = new Size(1200, 800);
-            this.MinimumSize = new Size(1050, 700);
+            this.Font = new Font("Tahoma", 9, FontStyle.Regular);
+            this.ClientSize = new Size(1120, 800);
+            this.MinimumSize = new Size(1000, 700);
 
             unitCircle = new Circle(new Point2D(0.0, 0.0), 1.0);
             functionModel = new CalculusFunctionModel("x^2");
@@ -125,11 +126,11 @@ namespace NP.NumericalModel.ConsoleSample
             Label expressionLabel = CreateLabel("f(x)=", 575, 43);
 
             Label rangeLabel = CreateLabel("بازه x:", 850, 12);
-            xminBox = CreateTextBox("-5", 895, 8, 55);
-            xmaxBox = CreateTextBox("5", 955, 8, 55);
+            xminBox = CreateTextBox("-5", 895, 8, 45);
+            xmaxBox = CreateTextBox("5", 945, 8, 45);
 
-            Label pointLabel = CreateLabel("نقطه:", 1015, 12);
-            xBox = CreateTextBox("1", 1055, 8, 55);
+            Label pointLabel = CreateLabel("نقطه:", 1000, 12);
+            xBox = CreateTextBox("1", 1040, 8, 55);
 
             Label hLabel = CreateLabel("h:", 15, 50);
             hBox = CreateTextBox("1", 38, 46, 55);
@@ -152,12 +153,12 @@ namespace NP.NumericalModel.ConsoleSample
 
             calculusLabel = new Label();
             calculusLabel.Location = new Point(15, 75);
-            calculusLabel.Size = new Size(1160, 60);
+            calculusLabel.Size = new Size(1085, 60);
             calculusLabel.Font = new Font("Tahoma", 9, FontStyle.Regular);
 
             canvas = new Panel();
             canvas.Location = new Point(10, 140);
-            canvas.Size = new Size(1180, 645);
+            canvas.Size = new Size(1100, 645);
             canvas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom |
                             AnchorStyles.Left | AnchorStyles.Right;
             canvas.BackColor = Color.White;
@@ -385,12 +386,17 @@ namespace NP.NumericalModel.ConsoleSample
                 "    y = " + orbitPoint.Y.ToString("0.000");
 
             calculusLabel.Text =
-                "تابع: " + functionModel.Formula +
-                "    نقطه: (" + pointX.ToString("0.###") + ", " + y.ToString("0.###") + ")" +
-                "    مشتق: f'(x) ≈ " + derivative.ToString("0.###") +
-                "    شیب مماس = " + derivative.ToString("0.###") +
-                "    انتگرال [" + integralA.ToString("0.###") + ", " +
-                integralB.ToString("0.###") + "] = " + area.ToString("0.####");
+                "f(x) = " + functionModel.Formula +
+                "    |    نقطه: (" + pointX.ToString("0.###") + ", " + y.ToString("0.###") + ")" +
+                "    |    f'(x) ≈ " + derivative.ToString("0.###") +
+                "    |    شیب مماس = " + derivative.ToString("0.###") +
+                "    |    ∫[" + integralA.ToString("0.###") + "," +
+                integralB.ToString("0.###") + "] f(x)dx = " + area.ToString("0.####") +
+                "\r\n" +
+                "فرمول مشتق: " + functionModel.DerivativeFormula +
+                "    |    تعریف: lim(h→0) [f(x+h)-f(x)]/h" +
+                "    |    فرمول انتگرال: " + functionModel.IntegralFormula +
+                "    |    روش عددی: Simpson";
         }
 
         private void canvas_Paint(object sender, PaintEventArgs e)
@@ -856,6 +862,33 @@ namespace NP.NumericalModel.ConsoleSample
             public double Evaluate(double x)
             {
                 return parser.Evaluate(x);
+            }
+
+            public string DerivativeFormula
+            {
+                get
+                {
+                    return "d/dx(" + expression + ")";
+                }
+            }
+
+            public string IntegralFormula
+            {
+                get
+                {
+                    return "∫[" + integralPlaceholderA + "," + integralPlaceholderB + "](" +
+                           expression + ")dx";
+                }
+            }
+
+            private string integralPlaceholderA
+            {
+                get { return "a"; }
+            }
+
+            private string integralPlaceholderB
+            {
+                get { return "b"; }
             }
 
             public double Derivative(double x)
