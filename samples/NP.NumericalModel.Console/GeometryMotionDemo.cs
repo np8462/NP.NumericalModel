@@ -13,11 +13,6 @@ namespace NP.NumericalModel.ConsoleSample
         private CheckBox animationCheck;
         private Label infoLabel;
         private Panel canvas;
-        private Bitmap oscillationBitmap;
-        private float oscillationLeft;
-        private float oscillationCy;
-        private float oscillationRadius;
-        private float oscillationSpan;
 
         private double angleDeg;
         private Circle unitCircle;
@@ -77,19 +72,12 @@ namespace NP.NumericalModel.ConsoleSample
             this.Controls.Add(canvas);
 
             UpdateModel();
-            canvas.Resize += new EventHandler(canvas_Resize);
         }
 
         private void angleBar_ValueChanged(object sender, EventArgs e)
         {
             angleDeg = angleBar.Value;
             UpdateModel();
-            canvas.Invalidate();
-        }
-
-        private void canvas_Resize(object sender, EventArgs e)
-        {
-            CreateOscillationBitmap();
             canvas.Invalidate();
         }
 
@@ -144,12 +132,7 @@ namespace NP.NumericalModel.ConsoleSample
             float radius = Math.Min(w / 6.0f, h / 3.0f);
 
             DrawUnitCircle(g, cx, cy, radius);
-            PrepareOscillationLayout(w, h, cx + radius + 90.0f, cy, radius);
-            if (oscillationBitmap == null)
-                CreateOscillationBitmap();
-            if (oscillationBitmap != null)
-                g.DrawImageUnscaled(oscillationBitmap, (int)oscillationLeft, 0); 
-            DrawOscillationCursor(g);
+            DrawOscillation(g, w, h, cx + radius + 90.0f, cy, radius);
         }
 
         private void DrawUnitCircle(
@@ -223,98 +206,116 @@ namespace NP.NumericalModel.ConsoleSample
                 cy + 8.0f);
         }
 
-        private void PrepareOscillationLayout(
+        private void DrawOscillation(
+            Graphics g,
             int width,
             int height,
             float left,
             float cy,
             float radius)
         {
-            oscillationLeft = left;
-            oscillationCy = cy;
-            oscillationRadius = radius;
-            oscillationSpan = width - left - 45.0f;
-        }
+            Pen axisPen = Pens.Gray;
+            Pen curvePen = Pens.DarkRed;
 
-        private void CreateOscillationBitmap()
-        {
-            if (canvas == null || canvas.ClientSize.Width <= 0 || canvas.ClientSize.Height <= 0)
-                return;
+            float top = cy - radius;
+            float bottom = cy + radius;
 
-            int width = canvas.ClientSize.Width;
-            int height = canvas.ClientSize.Height;
+            g.DrawLine(
+                axisPen,
+                left,
+                top,
+                left,
+                bottom);
 
-            float w = width;
-            float h = height;
-            float cx = w / 3.0f;
-            float cy = h / 2.0f;
-            float radius = Math.Min(w / 6.0f, h / 3.0f);
-            float left = cx + radius + 90.0f;
+            g.DrawLine(
+                axisPen,
+                left,
+                cy,
+                width - 30.0f,
+                cy);
+
+            PointF previous = PointF.Empty;
+            bool hasPrevious = false;
+
+            int samples = 360;
             float span = width - left - 45.0f;
 
-            if (oscillationBitmap != null)
-                oscillationBitmap.Dispose();
-
-            oscillationBitmap = new Bitmap(width, height);
-
-            using (Graphics g = Graphics.FromImage(oscillationBitmap))
+            for (int i = 0; i <= samples; i++)
             {
-                g.Clear(Color.White);
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                double a = (i * Math.PI * 2.0) / samples;
+                float x = left + span * i / (float)samples;
+                float y = cy - (float)Math.Sin(a) * radius;
 
-                float top = cy - radius;
-                float bottom = cy + radius;
+                PointF current = new PointF(x, y);
 
-                g.DrawLine(Pens.Gray, left, top, left, bottom);
-                g.DrawLine(Pens.Gray, left, cy, width - 30.0f, cy);
+                if (hasPrevious)
+                    g.DrawLine(curvePen, previous, current);
 
-                PointF previous = PointF.Empty;
-                bool hasPrevious = false;
-                int samples = 360;
-
-                for (int i = 0; i <= samples; i++)
-                {
-                    double a = (i * Math.PI * 2.0) / samples;
-                    float x = left + span * i / (float)samples;
-                    float y = cy - (float)Math.Sin(a) * radius;
-                    PointF current = new PointF(x, y);
-
-                    if (hasPrevious)
-                        g.DrawLine(Pens.DarkRed, previous, current);
-
-                    previous = current;
-                    hasPrevious = true;
-                }
-
-                g.DrawString("oscillation: sin(theta)", this.Font, Brushes.DarkRed,
-                    left + 10.0f, top - 25.0f);
-                g.DrawString("0", this.Font, Brushes.Black, left - 15.0f, cy - 5.0f);
-                g.DrawString("+1", this.Font, Brushes.Black, left - 20.0f, top - 5.0f);
-                g.DrawString("-1", this.Font, Brushes.Black, left - 20.0f, bottom - 5.0f);
-
-                Ratio ratio = new Ratio(1, 3);
-                g.DrawString("Model relation: " + ratio.ToString() +
-                    "  -> 60 deg reference", this.Font, Brushes.Black,
-                    left + 10.0f, bottom + 20.0f);
-                g.DrawString("same theta -> orbit position -> projection -> oscillation",
-                    this.Font, Brushes.Black, left + 10.0f, bottom + 42.0f);
+                previous = current;
+                hasPrevious = true;
             }
-        }
 
-        private void DrawOscillationCursor(Graphics g)
-        {
-            if (oscillationBitmap == null)
-                return;
+            float currentX = left + span * (float)(angleDeg / 360.0);
+            float currentY = cy - (float)orbitPoint.Y * radius;
 
-            float currentX = oscillationLeft +
-                oscillationSpan * (float)(angleDeg / 360.0);
-            float currentY = oscillationCy -
-                (float)orbitPoint.Y * oscillationRadius;
+            g.FillEllipse(
+                Brushes.Black,
+                currentX - 5.0f,
+                currentY - 5.0f,
+                10.0f,
+                10.0f);
 
-            g.DrawLine(Pens.DarkGreen, currentX, oscillationCy,
-                currentX, currentY);
-            g.FillEllipse(Brushes.Black, currentX - 5.0f,
-                currentY - 5.0f, 10.0f, 10.0f);
+            g.DrawLine(
+                Pens.DarkGreen,
+                currentX,
+                cy,
+                currentX,
+                currentY);
+
+            g.DrawString(
+                "oscillation: sin(theta)",
+                this.Font,
+                Brushes.DarkRed,
+                left + 10.0f,
+                top - 25.0f);
+
+            g.DrawString(
+                "0",
+                this.Font,
+                Brushes.Black,
+                left - 15.0f,
+                cy - 5.0f);
+
+            g.DrawString(
+                "+1",
+                this.Font,
+                Brushes.Black,
+                left - 20.0f,
+                top - 5.0f);
+
+            g.DrawString(
+                "-1",
+                this.Font,
+                Brushes.Black,
+                left - 20.0f,
+                bottom - 5.0f);
+
+            Ratio ratio = new Ratio(1, 3);
+
+            g.DrawString(
+                "Model relation: " + ratio.ToString() +
+                "  -> 60 deg reference",
+                this.Font,
+                Brushes.Black,
+                left + 10.0f,
+                bottom + 20.0f);
+
+            g.DrawString(
+                "same theta -> orbit position -> projection -> oscillation",
+                this.Font,
+                Brushes.Black,
+                left + 10.0f,
+                bottom + 42.0f);
         }
     }
 }
