@@ -17,6 +17,7 @@ namespace NP.NumericalModel.ConsoleSample
         private CheckBox animationCheck;
 
         private ComboBox functionCombo;
+        private TextBox functionExpressionBox;
         private TextBox xminBox;
         private TextBox xmaxBox;
         private TextBox xBox;
@@ -98,7 +99,7 @@ namespace NP.NumericalModel.ConsoleSample
 
             Label functionLabel = CreateLabel("تابع:", 575, 12);
             functionCombo = new ComboBox();
-            functionCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            functionCombo.DropDownStyle = ComboBoxStyle.DropDown;
             functionCombo.Location = new Point(615, 8);
             functionCombo.Size = new Size(135, 25);
             functionCombo.Items.Add("x^2");
@@ -108,12 +109,20 @@ namespace NP.NumericalModel.ConsoleSample
             functionCombo.Items.Add("cos(x)");
             functionCombo.Items.Add("e^x");
             functionCombo.SelectedIndex = 0;
+            functionCombo.Text = "x^2";
+
+            functionExpressionBox = new TextBox();
+            functionExpressionBox.Location = new Point(615, 38);
+            functionExpressionBox.Size = new Size(135, 25);
+            functionExpressionBox.Text = "x^2";
 
             applyFunctionButton = new Button();
             applyFunctionButton.Text = "اعمال تابع";
             applyFunctionButton.Location = new Point(755, 7);
             applyFunctionButton.Size = new Size(85, 27);
             applyFunctionButton.Click += new EventHandler(applyFunctionButton_Click);
+
+            Label expressionLabel = CreateLabel("f(x)=", 575, 43);
 
             Label rangeLabel = CreateLabel("بازه x:", 850, 12);
             xminBox = CreateTextBox("-5", 895, 8, 55);
@@ -168,6 +177,8 @@ namespace NP.NumericalModel.ConsoleSample
             this.Controls.Add(animationCheck);
             this.Controls.Add(functionLabel);
             this.Controls.Add(functionCombo);
+            this.Controls.Add(expressionLabel);
+            this.Controls.Add(functionExpressionBox);
             this.Controls.Add(applyFunctionButton);
             this.Controls.Add(rangeLabel);
             this.Controls.Add(xminBox);
@@ -254,13 +265,34 @@ namespace NP.NumericalModel.ConsoleSample
 
         private void applyFunctionButton_Click(object sender, EventArgs e)
         {
-            string name = functionCombo.SelectedItem as string;
+            string expression = functionExpressionBox.Text.Trim();
 
-            if (name == null)
+            if (expression.Length == 0)
+            {
+                MessageBox.Show("عبارت تابع خالی است.");
                 return;
+            }
 
-            functionModel = new CalculusFunctionModel(name);
-            ApplyNumericInputs();
+            try
+            {
+                CalculusFunctionModel candidate =
+                    new CalculusFunctionModel(expression);
+
+                candidate.Validate();
+
+                functionModel = candidate;
+                functionCombo.Text = expression;
+                ApplyNumericInputs();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "تابع قابل ترسیم نیست.\r\n\r\n" +
+                    ex.Message,
+                    "خطای تابع",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
@@ -507,7 +539,7 @@ namespace NP.NumericalModel.ConsoleSample
                 double x = xMin + (xMax - xMin) * i / (double)samples;
                 double y = functionModel.Evaluate(x);
 
-                if (double.IsNaN(y) || double.IsInfinity(y))
+                if (double.IsNaN(y) || double.IsInfinity(y) || Math.Abs(y) > 1000000.0)
                 {
                     hasPrevious = false;
                     continue;
@@ -518,8 +550,10 @@ namespace NP.NumericalModel.ConsoleSample
 
                 PointF current = new PointF(sx, sy);
 
-                if (hasPrevious)
+                if (hasPrevious && Math.Abs(current.Y - previous.Y) < (bottom - top) * 1.5f)
                     g.DrawLine(Pens.DarkRed, previous, current);
+                else
+                    hasPrevious = false;
 
                 previous = current;
                 hasPrevious = true;
@@ -538,17 +572,21 @@ namespace NP.NumericalModel.ConsoleSample
             double tangentY1 = fx + derivative * (tangentX1 - pointX);
             double tangentY2 = fx + derivative * (tangentX2 - pointX);
 
-            g.DrawLine(
-                Pens.DarkBlue,
-                MapX(tangentX1, left, right),
-                MapY(tangentY1, yMin, yMax, top, bottom),
-                MapX(tangentX2, left, right),
-                MapY(tangentY2, yMin, yMax, top, bottom));
+            if (!double.IsNaN(derivative) && !double.IsInfinity(derivative))
+            {
+                g.DrawLine(
+                    Pens.DarkBlue,
+                    MapX(tangentX1, left, right),
+                    MapY(tangentY1, yMin, yMax, top, bottom),
+                    MapX(tangentX2, left, right),
+                    MapY(tangentY2, yMin, yMax, top, bottom));
+            }
 
             double secantX2 = Clamp(pointX + secantH, xMin, xMax);
             double secantY2 = functionModel.Evaluate(secantX2);
 
-            if (Math.Abs(secantX2 - pointX) > 0.000001)
+            if (!double.IsNaN(secantY2) && !double.IsInfinity(secantY2) &&
+                Math.Abs(secantX2 - pointX) > 0.000001)
             {
                 g.DrawLine(
                     Pens.DarkGreen,
@@ -649,9 +687,13 @@ namespace NP.NumericalModel.ConsoleSample
                     axisY));
 
             if (builder.Count >= 3)
-                g.FillPolygon(
-                    new SolidBrush(Color.FromArgb(55, Color.Purple)),
-                    builder.ToArray());
+            {
+                using (SolidBrush brush =
+                    new SolidBrush(Color.FromArgb(55, Color.Purple)))
+                {
+                    g.FillPolygon(brush, builder.ToArray());
+                }
+            }
         }
 
         private double[] CalculateYRange()
@@ -670,6 +712,9 @@ namespace NP.NumericalModel.ConsoleSample
                 double y = functionModel.Evaluate(x);
 
                 if (double.IsNaN(y) || double.IsInfinity(y))
+                    continue;
+
+                if (Math.Abs(y) > 1000000.0)
                     continue;
 
                 if (y < min)
@@ -782,73 +827,54 @@ namespace NP.NumericalModel.ConsoleSample
 
         private class CalculusFunctionModel
         {
-            private string name;
+            private string expression;
+            private FunctionExpressionParser parser;
 
-            public CalculusFunctionModel(string name)
+            public CalculusFunctionModel(string expression)
             {
-                this.name = name;
+                if (expression == null)
+                    throw new ArgumentNullException("expression");
+
+                this.expression = expression.Trim();
+
+                if (this.expression.Length == 0)
+                    throw new FormatException("عبارت تابع خالی است.");
+
+                parser = new FunctionExpressionParser(this.expression);
             }
 
             public string Formula
             {
-                get
-                {
-                    return name;
-                }
+                get { return expression; }
+            }
+
+            public void Validate()
+            {
+                parser.Parse();
+                double test = Evaluate(0.0);
+
+                if (double.IsNaN(test) || double.IsInfinity(test))
+                    throw new FormatException(
+                        "تابع در x = 0 مقدار معتبر تولید نمی‌کند.");
             }
 
             public double Evaluate(double x)
             {
-                switch (name)
-                {
-                    case "x^2":
-                        return x * x;
-
-                    case "x^3":
-                        return x * x * x;
-
-                    case "x^3 - 3x":
-                        return x * x * x - 3.0 * x;
-
-                    case "sin(x)":
-                        return Math.Sin(x);
-
-                    case "cos(x)":
-                        return Math.Cos(x);
-
-                    case "e^x":
-                        return Math.Exp(x);
-
-                    default:
-                        return x * x;
-                }
+                return parser.Evaluate(x);
             }
 
             public double Derivative(double x)
             {
-                switch (name)
-                {
-                    case "x^2":
-                        return 2.0 * x;
+                double h = 0.00001 * Math.Max(1.0, Math.Abs(x));
 
-                    case "x^3":
-                        return 3.0 * x * x;
+                double left = Evaluate(x - h);
+                double right = Evaluate(x + h);
 
-                    case "x^3 - 3x":
-                        return 3.0 * x * x - 3.0;
+                if (double.IsNaN(left) || double.IsInfinity(left) ||
+                    double.IsNaN(right) || double.IsInfinity(right))
+                    return double.NaN;
 
-                    case "sin(x)":
-                        return Math.Cos(x);
-
-                    case "cos(x)":
-                        return -Math.Sin(x);
-
-                    case "e^x":
-                        return Math.Exp(x);
-
-                    default:
-                        return 2.0 * x;
-                }
+                return (right - left) / (2.0 * h);
             }
 
             public double Integral(double a, double b)
@@ -864,19 +890,419 @@ namespace NP.NumericalModel.ConsoleSample
                 double h = (b - a) / n;
                 double sum = Evaluate(a) + Evaluate(b);
 
+                if (double.IsNaN(sum) || double.IsInfinity(sum))
+                    return double.NaN;
+
                 int i;
 
                 for (i = 1; i < n; i++)
                 {
                     double x = a + i * h;
+                    double y = Evaluate(x);
+
+                    if (double.IsNaN(y) || double.IsInfinity(y))
+                        return double.NaN;
 
                     if (i % 2 == 0)
-                        sum += 2.0 * Evaluate(x);
+                        sum += 2.0 * y;
                     else
-                        sum += 4.0 * Evaluate(x);
+                        sum += 4.0 * y;
                 }
 
                 return sum * h / 3.0;
+            }
+        }
+
+        private class FunctionExpressionParser
+        {
+            private string text;
+            private int position;
+            private Node root;
+            private bool parsed;
+
+            public FunctionExpressionParser(string text)
+            {
+                this.text = text;
+            }
+
+            public void Parse()
+            {
+                if (parsed)
+                    return;
+
+                position = 0;
+                root = ParseExpression();
+                SkipSpaces();
+
+                if (position < text.Length)
+                    throw Error("عبارت اضافی یا نویسه ناشناخته در موقعیت " +
+                                position.ToString() + ".");
+
+                parsed = true;
+            }
+
+            public double Evaluate(double x)
+            {
+                Parse();
+
+                try
+                {
+                    return root.Evaluate(x);
+                }
+                catch (Exception ex)
+                {
+                    throw new FormatException(
+                        "محاسبه تابع در x = " + x.ToString("0.###") +
+                        " ناموفق بود: " + ex.Message);
+                }
+            }
+
+            private Node ParseExpression()
+            {
+                Node left = ParseTerm();
+
+                while (true)
+                {
+                    SkipSpaces();
+
+                    if (Match('+'))
+                        left = new BinaryNode('+', left, ParseTerm());
+                    else if (Match('-'))
+                        left = new BinaryNode('-', left, ParseTerm());
+                    else
+                        return left;
+                }
+            }
+
+            private Node ParseTerm()
+            {
+                Node left = ParsePower();
+
+                while (true)
+                {
+                    SkipSpaces();
+
+                    if (Match('*'))
+                        left = new BinaryNode('*', left, ParsePower());
+                    else if (Match('/'))
+                        left = new BinaryNode('/', left, ParsePower());
+                    else if (IsImplicitMultiplication())
+                        left = new BinaryNode('*', left, ParsePower());
+                    else
+                        return left;
+                }
+            }
+
+            private Node ParsePower()
+            {
+                Node left = ParseUnary();
+
+                SkipSpaces();
+
+                if (Match('^'))
+                    return new BinaryNode('^', left, ParsePower());
+
+                return left;
+            }
+
+            private Node ParseUnary()
+            {
+                SkipSpaces();
+
+                if (Match('+'))
+                    return ParseUnary();
+
+                if (Match('-'))
+                    return new UnaryNode('-', ParseUnary());
+
+                return ParsePrimary();
+            }
+
+            private Node ParsePrimary()
+            {
+                SkipSpaces();
+
+                if (position >= text.Length)
+                    throw Error("انتظار یک عدد، x یا تابع وجود داشت.");
+
+                if (Match('('))
+                {
+                    Node inside = ParseExpression();
+                    Expect(')');
+                    return inside;
+                }
+
+                if (char.IsDigit(text[position]) || text[position] == '.')
+                    return new NumberNode(ParseNumber());
+
+                if (char.IsLetter(text[position]))
+                {
+                    string name = ParseName();
+
+                    if (string.Equals(name, "x", StringComparison.OrdinalIgnoreCase))
+                        return new VariableNode();
+
+                    if (string.Equals(name, "pi", StringComparison.OrdinalIgnoreCase))
+                        return new NumberNode(Math.PI);
+
+                    if (string.Equals(name, "e", StringComparison.OrdinalIgnoreCase))
+                        return new NumberNode(Math.E);
+
+                    SkipSpaces();
+
+                    if (Match('('))
+                    {
+                        Node argument = ParseExpression();
+                        Expect(')');
+                        return new FunctionNode(name, argument);
+                    }
+
+                    throw Error("تابع یا ثابت ناشناخته: " + name);
+                }
+
+                throw Error("نویسه نامعتبر: " + text[position]);
+            }
+
+            private bool IsImplicitMultiplication()
+            {
+                SkipSpaces();
+
+                if (position >= text.Length)
+                    return false;
+
+                char ch = text[position];
+
+                return ch == '(' ||
+                       ch == '.' ||
+                       char.IsDigit(ch) ||
+                       char.IsLetter(ch);
+            }
+
+            private double ParseNumber()
+            {
+                int start = position;
+                bool hasDigits = false;
+
+                while (position < text.Length &&
+                       char.IsDigit(text[position]))
+                {
+                    hasDigits = true;
+                    position++;
+                }
+
+                if (position < text.Length && text[position] == '.')
+                {
+                    position++;
+
+                    while (position < text.Length &&
+                           char.IsDigit(text[position]))
+                    {
+                        hasDigits = true;
+                        position++;
+                    }
+                }
+
+                if (!hasDigits)
+                    throw Error("عدد معتبر نیست.");
+
+                string value = text.Substring(start, position - start);
+                double result;
+
+                if (!double.TryParse(
+                    value,
+                    System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out result))
+                    throw Error("عدد نامعتبر: " + value);
+
+                return result;
+            }
+
+            private string ParseName()
+            {
+                int start = position;
+
+                while (position < text.Length &&
+                       char.IsLetter(text[position]))
+                    position++;
+
+                return text.Substring(start, position - start);
+            }
+
+            private void Expect(char ch)
+            {
+                SkipSpaces();
+
+                if (!Match(ch))
+                    throw Error("انتظار '" + ch + "' وجود داشت.");
+            }
+
+            private bool Match(char ch)
+            {
+                if (position < text.Length && text[position] == ch)
+                {
+                    position++;
+                    return true;
+                }
+
+                return false;
+            }
+
+            private void SkipSpaces()
+            {
+                while (position < text.Length &&
+                       char.IsWhiteSpace(text[position]))
+                    position++;
+            }
+
+            private FormatException Error(string message)
+            {
+                return new FormatException(message);
+            }
+
+            private abstract class Node
+            {
+                public abstract double Evaluate(double x);
+            }
+
+            private class NumberNode : Node
+            {
+                private double value;
+
+                public NumberNode(double value)
+                {
+                    this.value = value;
+                }
+
+                public override double Evaluate(double x)
+                {
+                    return value;
+                }
+            }
+
+            private class VariableNode : Node
+            {
+                public override double Evaluate(double x)
+                {
+                    return x;
+                }
+            }
+
+            private class UnaryNode : Node
+            {
+                private char operation;
+                private Node value;
+
+                public UnaryNode(char operation, Node value)
+                {
+                    this.operation = operation;
+                    this.value = value;
+                }
+
+                public override double Evaluate(double x)
+                {
+                    double v = value.Evaluate(x);
+
+                    if (operation == '-')
+                        return -v;
+
+                    return v;
+                }
+            }
+
+            private class BinaryNode : Node
+            {
+                private char operation;
+                private Node left;
+                private Node right;
+
+                public BinaryNode(char operation, Node left, Node right)
+                {
+                    this.operation = operation;
+                    this.left = left;
+                    this.right = right;
+                }
+
+                public override double Evaluate(double x)
+                {
+                    double a = left.Evaluate(x);
+                    double b = right.Evaluate(x);
+
+                    switch (operation)
+                    {
+                        case '+':
+                            return a + b;
+
+                        case '-':
+                            return a - b;
+
+                        case '*':
+                            return a * b;
+
+                        case '/':
+                            if (Math.Abs(b) < 0.000000000000001)
+                                return double.NaN;
+
+                            return a / b;
+
+                        case '^':
+                            return Math.Pow(a, b);
+
+                        default:
+                            return double.NaN;
+                    }
+                }
+            }
+
+            private class FunctionNode : Node
+            {
+                private string name;
+                private Node argument;
+
+                public FunctionNode(string name, Node argument)
+                {
+                    this.name = name;
+                    this.argument = argument;
+                }
+
+                public override double Evaluate(double x)
+                {
+                    double value = argument.Evaluate(x);
+
+                    switch (name.ToLowerInvariant())
+                    {
+                        case "sin":
+                            return Math.Sin(value);
+
+                        case "cos":
+                            return Math.Cos(value);
+
+                        case "tan":
+                            return Math.Tan(value);
+
+                        case "sqrt":
+                            return value < 0.0 ? double.NaN : Math.Sqrt(value);
+
+                        case "abs":
+                            return Math.Abs(value);
+
+                        case "exp":
+                            return Math.Exp(value);
+
+                        case "log":
+                            return value <= 0.0 ? double.NaN : Math.Log(value);
+
+                        case "ln":
+                            return value <= 0.0 ? double.NaN : Math.Log(value);
+
+                        case "log10":
+                            return value <= 0.0 ? double.NaN : Math.Log10(value);
+
+                        default:
+                            throw new FormatException(
+                                "تابع ناشناخته: " + name);
+                    }
+                }
             }
         }
 
