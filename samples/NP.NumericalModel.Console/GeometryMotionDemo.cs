@@ -576,29 +576,40 @@ namespace NP.NumericalModel.ConsoleSample
             double derivative = functionModel.Derivative(pointX);
             double area = functionModel.Integral(integralA, integralB);
 
-            g.DrawString(
-                "فرمول مشتق: " + functionModel.DerivativeFormula +
-                "    |    تعریف: lim(h→0) [f(x+h)-f(x)]/h",
-                this.Font,
-                Brushes.DarkBlue,
-                left + 10,
-                top + 10);
+            // اطلاعات محاسباتی عمداً در فضای سفید پایینِ چپ نمودار قرار می‌گیرند
+            // تا با خود منحنی و فرمول‌های بالای فرم تداخل نداشته باشند.
+            float formulaX = left + 10.0f;
+            float formulaY = bottom - 70.0f;
+
+            g.FillRectangle(
+                Brushes.White,
+                formulaX - 5.0f,
+                formulaY - 5.0f,
+                330.0f,
+                65.0f);
 
             g.DrawString(
-                "فرمول انتگرال: " + functionModel.IntegralFormula +
+                "مشتق: " + functionModel.DerivativeFormula +
+                "    |    f'(x) ≈ " + derivative.ToString("0.###"),
+                this.Font,
+                Brushes.DarkBlue,
+                formulaX,
+                formulaY);
+
+            g.DrawString(
+                "انتگرال: " + functionModel.IntegralFormula +
                 " = " + area.ToString("0.####"),
                 this.Font,
                 Brushes.DarkGreen,
-                left + 10,
-                top + 30);
+                formulaX,
+                formulaY + 21.0f);
 
             g.DrawString(
-                "f'(x) در نقطه = " + derivative.ToString("0.###") +
-                "    |    مساحت/انتگرال بازه = " + area.ToString("0.####"),
+                "تعریف مشتق: lim(h→0) [f(x+h)-f(x)]/h",
                 this.Font,
                 Brushes.Black,
-                left + 10,
-                top + 50);
+                formulaX,
+                formulaY + 42.0f);
 
             float px = MapX(pointX, left, right);
             float py = MapY(fx, yMin, yMax, top, bottom);
