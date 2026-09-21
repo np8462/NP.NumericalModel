@@ -124,7 +124,8 @@ namespace NP.NumericalModel.ConsoleSample
                 "Geometry",
                 new List<DemoItem>
                 {
-                    new DemoItem("Geometry Model Demo", RunGeometryModelDemo)
+                    new DemoItem("Geometry Model Demo", RunGeometryModelDemo),
+                    new DemoItem("Geometry Motion Demo", RunGeometryMotionDemo)
                 });
 
             demoGroups.Add(
@@ -283,6 +284,12 @@ namespace NP.NumericalModel.ConsoleSample
         private void RunGeometryModelDemo()
         {
             GeometryModelDemo.Run();
+        }
+
+        private void RunGeometryMotionDemo()
+        {
+            GeometryMotionDemo form = new GeometryMotionDemo();
+            form.ShowDialog(this);
         }
 
         private void RunSvgDemo()
