@@ -38,7 +38,6 @@ namespace NP.NumericalModel.ConsoleSample
             lblTitle.Location = new Point(165, 25);
 
             Label lblCategory = new Label();
-            //lblCategory.Text = "دسته:";
             lblCategory.Text = "Category :";
             lblCategory.AutoSize = true;
             lblCategory.Location = new Point(70, 85);
@@ -51,7 +50,6 @@ namespace NP.NumericalModel.ConsoleSample
                 new EventHandler(cmbCategory_SelectedIndexChanged);
 
             Label lblDemo = new Label();
-            //lblDemo.Text = "آزمون:";
             lblDemo.Text = "Demo :";
             lblDemo.AutoSize = true;
             lblDemo.Location = new Point(70, 125);
@@ -62,7 +60,6 @@ namespace NP.NumericalModel.ConsoleSample
             cmbDemo.Size = new Size(280, 25);
 
             btnRun = new Button();
-            //btnRun.Text = "اجرای Demo";
             btnRun.Text = "Run Demo";
             btnRun.Size = new Size(140, 40);
             btnRun.Location = new Point(180, 175);
@@ -125,32 +122,19 @@ namespace NP.NumericalModel.ConsoleSample
                 new List<DemoItem>
                 {
                     new DemoItem("Geometry Model Demo", RunGeometryModelDemo),
-                    new DemoItem("Geometry Motion Demo", RunGeometryMotionDemo)
+                    new DemoItem("Geometry Motion Demo", RunGeometryMotionDemo),
+                    new DemoItem("Oblique 2D / Z Motion Demo", RunObliqueGeometryMotionDemo)
                 });
 
             demoGroups.Add(
                 "Visualization",
                 new List<DemoItem>
                 {
-                    new DemoItem(
-                        "SVG - Segment Division",
-                        RunSvgDemo),
-
-                    new DemoItem(
-                        "SVG - Relation Diagram",
-                        RunRelationDiagramDemo),
-
-                    new DemoItem(
-                        "SVG - Selected Relations",
-                        RunSelectedRelationsDemo),
-
-                    new DemoItem(
-                        "SVG - Seven Bridge",
-                        RunSevenBridgeDemo),
-
-                    new DemoItem(
-                        "SVG - Full Interpretation",
-                        RunFullInterpretationDemo)
+                    new DemoItem("SVG - Segment Division", RunSvgDemo),
+                    new DemoItem("SVG - Relation Diagram", RunRelationDiagramDemo),
+                    new DemoItem("SVG - Selected Relations", RunSelectedRelationsDemo),
+                    new DemoItem("SVG - Seven Bridge", RunSevenBridgeDemo),
+                    new DemoItem("SVG - Full Interpretation", RunFullInterpretationDemo)
                 });
         }
 
@@ -159,40 +143,27 @@ namespace NP.NumericalModel.ConsoleSample
             cmbCategory.Items.Clear();
 
             foreach (string category in demoGroups.Keys)
-            {
                 cmbCategory.Items.Add(category);
-            }
 
             if (cmbCategory.Items.Count > 0)
-            {
                 cmbCategory.SelectedIndex = 0;
-            }
         }
 
-        private void cmbCategory_SelectedIndexChanged(
-            object sender,
-            EventArgs e)
+        private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbDemo.Items.Clear();
 
             string category = cmbCategory.SelectedItem as string;
-
             if (category == null)
-            {
                 return;
-            }
 
             List<DemoItem> demos = demoGroups[category];
 
             foreach (DemoItem demo in demos)
-            {
                 cmbDemo.Items.Add(demo);
-            }
 
             if (cmbDemo.Items.Count > 0)
-            {
                 cmbDemo.SelectedIndex = 0;
-            }
         }
 
         private void btnRun_Click(object sender, EventArgs e)
@@ -206,7 +177,6 @@ namespace NP.NumericalModel.ConsoleSample
                     "NP.NumericalModel",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-
                 return;
             }
 
@@ -231,60 +201,17 @@ namespace NP.NumericalModel.ConsoleSample
             }
         }
 
-        private void RunBaseSystemDemo()
-        {
-            BaseSystemDemo.Run();
-        }
-
-        private void RunBaseConversionDemo()
-        {
-            BaseConversionDemo.Run();
-        }
-
-        private void RunStructuralModelDemo()
-        {
-            StructuralModelDemo.Run();
-        }
-
-        private void RunBoundaryTransitionDemo()
-        {
-            BoundaryTransitionDemo.Run();
-        }
-
-        private void RunRelationAnalyzerDemo()
-        {
-            RelationAnalyzerDemo.Run();
-        }
-
-        private void RunFactorialStateDemo()
-        {
-            FactorialStateDemo.Run();
-        }
-
-        private void RunFactorRelationDemo()
-        {
-            FactorRelationDemo.Run();
-        }
-
-        private void RunConceptualRelationDemo()
-        {
-            ConceptualRelationDemo.Run();
-        }
-
-        private void RunRelationEngineDemo()
-        {
-            RelationEngineDemo.Run();
-        }
-
-        private void RunInterpretationDemo()
-        {
-            InterpretationDemo.Run();
-        }
-
-        private void RunGeometryModelDemo()
-        {
-            GeometryModelDemo.Run();
-        }
+        private void RunBaseSystemDemo() { BaseSystemDemo.Run(); }
+        private void RunBaseConversionDemo() { BaseConversionDemo.Run(); }
+        private void RunStructuralModelDemo() { StructuralModelDemo.Run(); }
+        private void RunBoundaryTransitionDemo() { BoundaryTransitionDemo.Run(); }
+        private void RunRelationAnalyzerDemo() { RelationAnalyzerDemo.Run(); }
+        private void RunFactorialStateDemo() { FactorialStateDemo.Run(); }
+        private void RunFactorRelationDemo() { FactorRelationDemo.Run(); }
+        private void RunConceptualRelationDemo() { ConceptualRelationDemo.Run(); }
+        private void RunRelationEngineDemo() { RelationEngineDemo.Run(); }
+        private void RunInterpretationDemo() { InterpretationDemo.Run(); }
+        private void RunGeometryModelDemo() { GeometryModelDemo.Run(); }
 
         private void RunGeometryMotionDemo()
         {
@@ -292,136 +219,104 @@ namespace NP.NumericalModel.ConsoleSample
             form.ShowDialog(this);
         }
 
+        private void RunObliqueGeometryMotionDemo()
+        {
+            ObliqueGeometryMotionDemo form =
+                new ObliqueGeometryMotionDemo();
+
+            form.ShowDialog(this);
+        }
+
         private void RunSvgDemo()
         {
-            SegmentDivision division =
-                new SegmentDivision(1m, 3);
+            SegmentDivision division = new SegmentDivision(1m, 3);
 
-            string svg =
-                SvgRenderer.RenderSegmentDivision(
-                    division,
-                    900,
-                    400);
-
-            OpenSvg(
-                svg,
-                "NP_NumericalModel_SegmentDivision.svg");
+            string svg = SvgRenderer.RenderSegmentDivision(division, 900, 400);
+            OpenSvg(svg, "NP_NumericalModel_SegmentDivision.svg");
         }
 
         private void RunRelationDiagramDemo()
         {
             InterpretationDefinition definition =
-                InterpretationDefinitionFactory
-                    .CreateSelectedRelationsDefinition();
+                InterpretationDefinitionFactory.CreateSelectedRelationsDefinition();
 
             string svg =
                 SvgRenderer.RenderRelationDiagram(
                     definition,
                     "Selected Numerical Relations");
 
-            OpenSvg(
-                svg,
-                "NP_NumericalModel_RelationDiagram.svg");
+            OpenSvg(svg, "NP_NumericalModel_RelationDiagram.svg");
         }
 
         private void RunSelectedRelationsDemo()
         {
             InterpretationDefinition definition =
-                InterpretationDefinitionFactory
-                    .CreateSelectedRelationsDefinition();
+                InterpretationDefinitionFactory.CreateSelectedRelationsDefinition();
 
             string svg =
                 SvgRenderer.RenderRelationDiagram(
                     definition,
                     "Selected Numerical Relations");
 
-            OpenSvg(
-                svg,
-                "NP_NumericalModel_SelectedRelations.svg");
+            OpenSvg(svg, "NP_NumericalModel_SelectedRelations.svg");
         }
 
         private void RunSevenBridgeDemo()
         {
             InterpretationDefinition definition =
-                InterpretationDefinitionFactory
-                    .CreateSevenBridgeDefinition();
+                InterpretationDefinitionFactory.CreateSevenBridgeDefinition();
 
             string svg =
                 SvgRenderer.RenderRelationDiagram(
                     definition,
                     "Seven Bridge Interpretation");
 
-            OpenSvg(
-                svg,
-                "NP_NumericalModel_SevenBridge.svg");
+            OpenSvg(svg, "NP_NumericalModel_SevenBridge.svg");
         }
 
         private void RunFullInterpretationDemo()
         {
-            InterpretationDefinition selected =
-                InterpretationDefinitionFactory
-                    .CreateSelectedRelationsDefinition();
-
-            InterpretationDefinition seven =
-                InterpretationDefinitionFactory
-                    .CreateSevenBridgeDefinition();
+            InterpretationDefinition definition =
+                InterpretationDefinitionFactory.CreateFullDefinition();
 
             string svg =
                 SvgRenderer.RenderRelationDiagram(
-                    selected,
-                    "Full Interpretation - Selected Relations");
+                    definition,
+                    "Full Interpretation");
 
-            OpenSvg(
-                svg,
-                "NP_NumericalModel_FullInterpretation_Selected.svg");
-
-            string svgSeven =
-                SvgRenderer.RenderRelationDiagram(
-                    seven,
-                    "Full Interpretation - Seven Bridge");
-
-            OpenSvg(
-                svgSeven,
-                "NP_NumericalModel_FullInterpretation_SevenBridge.svg");
+            OpenSvg(svg, "NP_NumericalModel_FullInterpretation.svg");
         }
 
-        private void OpenSvg(
-string svg,
-string fileName)
+        private void OpenSvg(string svg, string fileName)
         {
-            string filePath =
-                System.IO.Path.Combine(
-                    System.IO.Path.GetTempPath(),
-                    fileName);
+            string path = System.IO.Path.Combine(
+                System.IO.Path.GetTempPath(),
+                fileName);
 
-            System.IO.File.WriteAllText(
-                filePath,
-                svg,
-                Encoding.UTF8);
-
-            System.Diagnostics.Process.Start(filePath);
-        }
-    }
-
-    public class DemoItem
-    {
-        private readonly string name;
-        private readonly Action action;
-
-        public DemoItem(string name, Action action)
-        {
-            this.name = name;
-            this.action = action;
+            System.IO.File.WriteAllText(path, svg, Encoding.UTF8);
+            System.Diagnostics.Process.Start(path);
         }
 
-        public void Run()
+        private class DemoItem
         {
-            action();
-        }
+            private string name;
+            private Action action;
 
-        public override string ToString()
-        {
-            return name;
+            public DemoItem(string name, Action action)
+            {
+                this.name = name;
+                this.action = action;
+            }
+
+            public void Run()
+            {
+                action();
+            }
+
+            public override string ToString()
+            {
+                return name;
+            }
         }
     }
 }
