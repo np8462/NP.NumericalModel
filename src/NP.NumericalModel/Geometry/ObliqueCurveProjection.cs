@@ -38,13 +38,16 @@ namespace NP.NumericalModel.Geometry
             double side = settings.Side;
             double depth = settings.DepthScale * point.Z;
 
-            // Angle is measured from the vertical Y axis toward Z.
-            // At 90 degrees, Z projects exactly along the old X direction.
-            // Side chooses the +1/-1 projected region.
-            double screenX = side * depth * Math.Sin(radians);
-            double screenY = -point.Y + side * depth * Math.Cos(radians);
+            // Angle is measured from the vertical Y axis toward the
+            // projected Z direction. This returns mathematical 2D
+            // coordinates; the renderer can later map Y to screen pixels.
+            //
+            // At 90 degrees, Z projects exactly along the old X direction
+            // and Y remains unchanged.
+            double projectedX = side * depth * Math.Sin(radians);
+            double projectedY = point.Y + side * depth * Math.Cos(radians);
 
-            return new Point2D(screenX, screenY);
+            return new Point2D(projectedX, projectedY);
         }
 
         public Point2D Project(Point2D point)
