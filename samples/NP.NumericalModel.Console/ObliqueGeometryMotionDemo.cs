@@ -255,15 +255,48 @@ namespace NP.NumericalModel.ConsoleSample
 
             g.DrawLine(Pens.LightGray, divider, 10, divider, h - 10);
 
-            DrawTwoDimensional(g, 10, 10, divider - 20, h - 20);
-            DrawOblique(g, divider + 10, 10, w - divider - 20, h - 20);
+            float left = 10.0f;
+            float top = 10.0f;
+            float leftWidth = divider - 20.0f;
+            float panelHeight = h - 20.0f;
+
+            float commonUnit = CalculateCommonUnit(leftWidth, panelHeight);
+
+            DrawTwoDimensional(g, left, top, leftWidth, panelHeight, commonUnit);
+            DrawOblique(g, divider + 10, top, w - divider - 20, panelHeight, commonUnit);
         }
 
-        private void DrawTwoDimensional(Graphics g, float left, float top, float width, float height)
+        private float CalculateCommonUnit(float width, float height)
+        {
+            int samples = 500;
+            double maxAbsY = 0.0;
+
+            for (int i = 0; i <= samples; i++)
+            {
+                double x = -Math.PI * 2.0 + 4.0 * Math.PI * i / samples;
+                double y = functionModel.Evaluate(x);
+
+                if (double.IsNaN(y) || double.IsInfinity(y) || Math.Abs(y) > 100000.0)
+                    continue;
+
+                if (Math.Abs(y) > maxAbsY)
+                    maxAbsY = Math.Abs(y);
+            }
+
+            if (maxAbsY < 0.000000000001)
+                maxAbsY = 1.0;
+
+            float horizontalUnit = width * 0.40f / (float)(2.0 * Math.PI);
+            float verticalUnit = height * 0.36f / (float)maxAbsY;
+
+            return Math.Min(horizontalUnit, verticalUnit);
+        }
+
+        private void DrawTwoDimensional(
+            Graphics g, float left, float top, float width, float height, float unit)
         {
             float cx = left + width * 0.50f;
-            float sx = width * 0.40f;
-            float sy = height * 0.36f;
+            float cy = top + height * 0.52f;
 
             int samples = 500;
             double yMin = double.MaxValue;
@@ -301,10 +334,10 @@ namespace NP.NumericalModel.ConsoleSample
             if (maxAbsY < 0.000000000001)
                 maxAbsY = 1.0;
 
-            float cy = top + height * 0.52f;
-            sy = (float)(height * 0.36 / maxAbsY);
+            float xHalf = (float)(2.0 * Math.PI * unit);
+            float yHalf = (float)(maxAbsY * unit);
 
-            DrawAxes(g, cx, cy, sx, height * 0.36f, true, "X", "Y");
+            DrawAxes(g, cx, cy, xHalf, yHalf, true, "X", "Y");
 
             PointF previous = PointF.Empty;
             bool hasPrevious = false;
@@ -321,8 +354,8 @@ namespace NP.NumericalModel.ConsoleSample
                 double y = values[i];
 
                 PointF current = new PointF(
-                    cx + (float)(x / (2.0 * Math.PI) * sx),
-                    cy - (float)(y * sy));
+                    cx + (float)(x * unit),
+                    cy - (float)(y * unit));
 
                 if (hasPrevious)
                     g.DrawLine(Pens.DarkRed, previous, current);
@@ -335,19 +368,19 @@ namespace NP.NumericalModel.ConsoleSample
                 Font, Brushes.DarkRed, left + 10, top + 10);
         }
 
-        private void DrawOblique(Graphics g, float left, float top, float width, float height)
+        private void DrawOblique(
+            Graphics g, float left, float top, float width, float height, float unit)
         {
             float ox = left + width * 0.46f;
             float oy = top + height * 0.52f;
-            float unit = Math.Min(width, height) * 0.16f;
 
             double radians = angleDeg * Math.PI / 180.0;
-            float zLength = unit * 2.8f;
+            float zLength = (float)(2.0 * Math.PI * unit);
             PointF zEnd = new PointF(
                 ox + side * (float)(zLength * Math.Sin(radians)),
                 oy - side * (float)(zLength * Math.Cos(radians)));
 
-            float yLength = unit * 2.6f;
+            float yLength = height * 0.36f;
 
             g.DrawLine(Pens.Gray, ox, oy, ox, oy - yLength);
             g.DrawLine(Pens.Gray, ox, oy, ox, oy + yLength);
