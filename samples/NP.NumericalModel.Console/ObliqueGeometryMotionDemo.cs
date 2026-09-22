@@ -262,15 +262,14 @@ namespace NP.NumericalModel.ConsoleSample
         private void DrawTwoDimensional(Graphics g, float left, float top, float width, float height)
         {
             float cx = left + width * 0.50f;
-            float cy = top + height * 0.52f;
             float sx = width * 0.40f;
             float sy = height * 0.36f;
 
-            DrawAxes(g, cx, cy, sx, sy, true, "X", "Y");
-
-            PointF previous = PointF.Empty;
-            bool hasPrevious = false;
             int samples = 500;
+            double yMin = double.MaxValue;
+            double yMax = double.MinValue;
+            double[] values = new double[samples + 1];
+            bool[] valid = new bool[samples + 1];
 
             for (int i = 0; i <= samples; i++)
             {
@@ -278,10 +277,48 @@ namespace NP.NumericalModel.ConsoleSample
                 double y = functionModel.Evaluate(x);
 
                 if (double.IsNaN(y) || double.IsInfinity(y) || Math.Abs(y) > 100000.0)
+                    continue;
+
+                values[i] = y;
+                valid[i] = true;
+
+                if (y < yMin)
+                    yMin = y;
+
+                if (y > yMax)
+                    yMax = y;
+            }
+
+            if (yMin == double.MaxValue)
+            {
+                g.DrawString(
+                    "تابع در بازه فعلی مقدار قابل ترسیمی ندارد.",
+                    Font, Brushes.DarkRed, left + 10, top + 10);
+                return;
+            }
+
+            double maxAbsY = Math.Max(Math.Abs(yMin), Math.Abs(yMax));
+            if (maxAbsY < 0.000000000001)
+                maxAbsY = 1.0;
+
+            float cy = top + height * 0.52f;
+            sy = (float)(height * 0.36 / maxAbsY);
+
+            DrawAxes(g, cx, cy, sx, height * 0.36f, true, "X", "Y");
+
+            PointF previous = PointF.Empty;
+            bool hasPrevious = false;
+
+            for (int i = 0; i <= samples; i++)
+            {
+                if (!valid[i])
                 {
                     hasPrevious = false;
                     continue;
                 }
+
+                double x = -Math.PI * 2.0 + 4.0 * Math.PI * i / samples;
+                double y = values[i];
 
                 PointF current = new PointF(
                     cx + (float)(x / (2.0 * Math.PI) * sx),
