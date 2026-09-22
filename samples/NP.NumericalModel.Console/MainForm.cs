@@ -134,7 +134,7 @@ namespace NP.NumericalModel.ConsoleSample
                     new DemoItem("SVG - Relation Diagram", RunRelationDiagramDemo),
                     new DemoItem("SVG - Selected Relations", RunSelectedRelationsDemo),
                     new DemoItem("SVG - Seven Bridge", RunSevenBridgeDemo),
-                    new DemoItem("SVG - Full Interpretation", RunFullInterpretationDemo)
+                    new DemoItem("SVG - Selected Relations (Full)", RunFullInterpretationDemo)
                 });
         }
 
@@ -277,12 +277,12 @@ namespace NP.NumericalModel.ConsoleSample
         private void RunFullInterpretationDemo()
         {
             InterpretationDefinition definition =
-                InterpretationDefinitionFactory.CreateFullDefinition();
+                InterpretationDefinitionFactory.CreateSelectedRelationsDefinition();
 
             string svg =
                 SvgRenderer.RenderRelationDiagram(
                     definition,
-                    "Full Interpretation");
+                    "Selected Numerical Relations (Full View)");
 
             OpenSvg(svg, "NP_NumericalModel_FullInterpretation.svg");
         }
