@@ -29,7 +29,7 @@ namespace NP.NumericalModel.Tests
             Point2D point = projection.Project(new Point2D(3.0, 2.0));
 
             Assert.AreEqual(3.0, point.X, 0.0000000001);
-            Assert.AreEqual(-2.0, point.Y, 0.0000000001);
+            Assert.AreEqual(2.0, point.Y, 0.0000000001);
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace NP.NumericalModel.Tests
             Point2D point = projection.Project(new Point2D(3.0, 2.0));
 
             Assert.AreEqual(-3.0, point.X, 0.0000000001);
-            Assert.AreEqual(-2.0, point.Y, 0.0000000001);
+            Assert.AreEqual(2.0, point.Y, 0.0000000001);
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace NP.NumericalModel.Tests
             Point2D point = projection.Project(new Point2D(2.0, 4.0));
 
             Assert.AreEqual(Math.Sqrt(3.0), point.X, 0.0000000001);
-            Assert.AreEqual(-5.0, point.Y, 0.0000000001);
+            Assert.AreEqual(3.0, point.Y, 0.0000000001);
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace NP.NumericalModel.Tests
             Point2D point = projection.Project(new Point2D(2.0, 4.0));
 
             Assert.AreEqual(Math.Sqrt(3.0) / 2.0, point.X, 0.0000000001);
-            Assert.AreEqual(-4.5, point.Y, 0.0000000001);
+            Assert.AreEqual(3.5, point.Y, 0.0000000001);
         }
 
         [TestMethod]
